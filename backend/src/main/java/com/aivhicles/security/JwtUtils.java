@@ -20,21 +20,21 @@ public class JwtUtils {
 
     public String generateToken(String username, String role) {
         return Jwts.builder()
-                .subject(username)
+                .setSubject(username)
                 .claim("role", role)
-                .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + expirationMs))
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + expirationMs))
                 .signWith(key)
                 .compact();
     }
 
     public String getUsername(String token) {
-        return Jwts.parser().verifyWith(key).build()
-                .parseSignedClaims(token).getPayload().getSubject();
+        return Jwts.parserBuilder().setSigningKey(key).build()
+                .parseClaimsJws(token).getBody().getSubject();
     }
 
     public String getRole(String token) {
-        return (String) Jwts.parser().verifyWith(key).build()
-                .parseSignedClaims(token).getPayload().get("role");
+        return Jwts.parserBuilder().setSigningKey(key).build()
+                .parseClaimsJws(token).getBody().get("role", String.class);
     }
 }
