@@ -2,14 +2,22 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ContentContext } from '../contexts/ContentContext.tsx';
 
+interface HeroSectionProps {
+  short?: boolean;
+}
+
 /**
  * Hero banner introducing the product with CTA buttons.
  */
-export default function HeroSection() {
+export default function HeroSection({ short = false }: HeroSectionProps) {
   const { headline, tagline } = useContext(ContentContext);
 
   return (
-    <section className="relative flex items-center justify-center min-h-screen">
+    <section
+      className={`relative flex items-center justify-center ${
+        short ? 'h-64' : 'min-h-screen'
+      }`}
+    >
       <div
         className="absolute inset-0 -z-10 bg-gradient-to-r from-indigo-800 via-slate-800 to-teal-700 [background-size:200%_200%] animate-background-pan"
       />

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Header from './Header.tsx';
 import Footer from './Footer.tsx';
+import HeroSection from './HeroSection.tsx';
 
 /**
  * Contact page with a basic feedback form.
@@ -18,11 +19,10 @@ export default function Contact() {
   return (
     <>
       <Header />
-      <main className="pt-24 pb-16 max-w-3xl mx-auto px-4">
+      <HeroSection short />
+      <main className="max-w-3xl mx-auto px-4 py-16 text-slate-700 dark:text-slate-300">
         <h1 className="text-3xl font-bold mb-6 text-slate-900 dark:text-slate-100">Contact Us</h1>
-        <p className="mb-8 text-slate-700 dark:text-slate-300">
-          Have questions or feedback? Send us a message and we will get back to you.
-        </p>
+        <p className="mb-8">Have questions or feedback? Send us a message and we will get back to you.</p>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="email"
