@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header.tsx';
 import Footer from './Footer.tsx';
+import HeroSection from './HeroSection.tsx';
 
 interface FAQItem {
   question: string;
@@ -32,7 +33,8 @@ export default function FAQ() {
   return (
     <>
       <Header />
-      <main className="pt-24 pb-16 max-w-3xl mx-auto px-4">
+      <HeroSection short />
+      <main className="max-w-3xl mx-auto px-4 py-16">
         <h1 className="text-3xl font-bold mb-8 text-slate-900 dark:text-slate-100">FAQ</h1>
         <dl className="space-y-6 text-slate-700 dark:text-slate-300">
           {faqs.map((f) => (
