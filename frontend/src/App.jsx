@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LandingPage from './components/LandingPage.jsx';
+import LandingPage from './components/LandingPage.tsx';
 import Login from './components/Login.jsx';
 import VehicleList from './components/VehicleList.jsx';
 
