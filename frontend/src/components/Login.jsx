@@ -20,23 +20,23 @@ export default function Login() {
   };
 
   return (
-    <div className="h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
-      <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 p-8 shadow-md rounded space-y-4">
-        <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100">Login</h1>
+    <div className="h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-900">
+      <form onSubmit={handleSubmit} className="bg-white dark:bg-slate-800 p-8 shadow-md rounded space-y-4">
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Login</h1>
         <input
-          className="border p-2 w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100"
+          className="border border-slate-300 p-2 w-full dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100"
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
-          className="border p-2 w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100"
+          className="border border-slate-300 p-2 w-full dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100"
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button className="bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white px-4 py-2 rounded" type="submit">
+        <button className="bg-indigo-600 hover:bg-indigo-500 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white px-4 py-2 rounded" type="submit">
           Sign In
         </button>
       </form>
