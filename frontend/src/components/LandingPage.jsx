@@ -7,9 +7,9 @@ import { Link } from 'react-router-dom';
  */
 export default function LandingPage() {
   return (
-    <div className="flex flex-col min-h-screen text-gray-800">
+    <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200">
       {/* Header */}
-      <header className="sticky top-0 bg-white shadow z-10">
+      <header className="sticky top-0 bg-white dark:bg-gray-800 shadow z-10">
         <nav className="max-w-6xl mx-auto flex flex-wrap items-center justify-between p-4" aria-label="Main Navigation">
           <Link to="/" className="text-2xl font-bold">AIVhicles</Link>
           <ul className="flex flex-col w-full mt-4 space-y-2 md:space-y-0 md:flex-row md:w-auto md:space-x-4 md:mt-0">
@@ -26,7 +26,9 @@ export default function LandingPage() {
 
       {/* Hero Section */}
       <main id="home" className="flex-1">
-        <section className="text-center text-white bg-cover bg-center px-4 py-24" style={{backgroundImage: "url('https://images.unsplash.com/photo-1518306723728-6349e8fa19da?auto=format&fit=crop&w=1200&q=80')"}}>
+        <section
+          className="text-center text-white bg-cover bg-center bg-[url('https://images.unsplash.com/photo-1518306723728-6349e8fa19da?auto=format&fit=crop&w=1200&q=80')] px-4 py-24"
+        >
           <h1 className="text-4xl md:text-5xl font-extrabold mb-4">Revolutionize Vehicle Intelligence with AI</h1>
           <p className="mb-6 text-lg">Unlock advanced insights and automation for your vehicle data.</p>
           <Link to="/signup" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded">
@@ -67,7 +69,7 @@ export default function LandingPage() {
         </section>
 
         {/* Why Choose Us */}
-        <section id="about" className="bg-gray-100 py-16 px-4">
+        <section id="about" className="bg-gray-100 dark:bg-gray-800 py-16 px-4">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-8">Why Choose Us</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -117,9 +119,9 @@ export default function LandingPage() {
         </section>
 
         {/* Pricing Preview */}
-        <section id="pricing" className="bg-gray-100 py-16 px-4">
+        <section id="pricing" className="bg-gray-100 dark:bg-gray-800 py-16 px-4">
           <h2 className="text-3xl font-bold text-center mb-8">Pricing Preview</h2>
-          <div className="max-w-md mx-auto bg-white p-8 rounded shadow text-center">
+          <div className="max-w-md mx-auto bg-white dark:bg-gray-900 p-8 rounded shadow text-center">
             <p className="text-xl font-semibold mb-2">Starter Plan</p>
             <p className="text-2xl font-bold mb-4">$19/mo</p>
             <span className="inline-block bg-blue-100 text-blue-600 px-3 py-1 rounded-full mb-4">Free Trial Available</span>
@@ -149,7 +151,7 @@ export default function LandingPage() {
         </section>
 
         {/* Call to Action */}
-        <section id="cta" className="bg-blue-600 text-white text-center py-16 px-4">
+        <section id="cta" className="bg-blue-600 dark:bg-blue-700 text-white text-center py-16 px-4">
           <h2 className="text-3xl font-bold mb-4">Ready to transform your workflow?</h2>
           <Link to="/signup" className="bg-white text-blue-600 font-semibold px-6 py-3 rounded">
             Sign Up
@@ -158,7 +160,7 @@ export default function LandingPage() {
       </main>
 
       {/* Footer */}
-      <footer id="contact" className="bg-gray-800 text-gray-200 py-8">
+      <footer id="contact" className="bg-gray-800 dark:bg-gray-900 text-gray-200 py-8">
         <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <h3 className="text-lg font-bold">AIVhicles</h3>
@@ -180,8 +182,8 @@ export default function LandingPage() {
             </div>
             <form className="mt-4 flex" onSubmit={(e) => e.preventDefault()}>
               <label htmlFor="newsletter" className="sr-only">Email</label>
-              <input id="newsletter" type="email" placeholder="Email" className="p-2 w-full text-gray-800 rounded-l" />
-              <button className="bg-blue-500 px-4 rounded-r" type="submit">Subscribe</button>
+              <input id="newsletter" type="email" placeholder="Email" className="p-2 w-full text-gray-800 dark:bg-gray-700 dark:text-gray-100 rounded-l" />
+              <button className="bg-blue-500 dark:bg-blue-600 px-4 rounded-r" type="submit">Subscribe</button>
             </form>
           </div>
         </div>
