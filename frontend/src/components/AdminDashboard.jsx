@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAuth } from '../contexts/AuthContext.jsx';
 import { Navigate } from 'react-router-dom';
+import AdminHeader from './AdminHeader.jsx';
 
 /**
  * Admin portal skeleton listing the primary management areas available to
@@ -53,25 +54,28 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-100 dark:bg-slate-900 p-8">
-      <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
-        Admin Dashboard
-      </h1>
-      <div className="mt-8 grid gap-6 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
-        {sections.map((section) => (
-          <div
-            key={section.title}
-            className="rounded-lg bg-white p-6 shadow dark:bg-slate-800"
-          >
-            <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
-              {section.title}
-            </h2>
-            <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
-              {section.description}
-            </p>
-          </div>
-        ))}
-      </div>
+    <div className="min-h-screen bg-slate-100 dark:bg-slate-900">
+      <AdminHeader />
+      <main className="p-8">
+        <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
+          Admin Dashboard
+        </h1>
+        <div className="mt-8 grid gap-6 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
+          {sections.map((section) => (
+            <div
+              key={section.title}
+              className="rounded-lg bg-white p-6 shadow dark:bg-slate-800"
+            >
+              <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
+                {section.title}
+              </h2>
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+                {section.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </main>
     </div>
   );
 }
