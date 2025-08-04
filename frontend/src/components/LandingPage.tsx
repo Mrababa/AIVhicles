@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './Header.tsx';
 import HeroSection from './HeroSection.tsx';
 import FeaturesSection from './FeaturesSection.tsx';
+import DataStreamSection from './DataStreamSection.tsx';
 import TestimonialsSection from './TestimonialsSection.tsx';
 import FinalCTASection from './FinalCTASection.tsx';
 import Footer from './Footer.tsx';
@@ -17,6 +18,7 @@ export default function LandingPage() {
       <main className="flex flex-col">
         <HeroSection />
         <FeaturesSection />
+        <DataStreamSection />
         <TestimonialsSection />
         <FinalCTASection />
       </main>
