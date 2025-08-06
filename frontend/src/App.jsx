@@ -7,6 +7,7 @@ import AdminDashboard from './components/AdminDashboard.jsx';
 import AdminPlaceholder from './components/AdminPlaceholder.jsx';
 import Logout from './components/Logout.jsx';
 import VehicleList from './components/VehicleList.jsx';
+import LightVehicleCatalog from './components/LightVehicleCatalog.jsx';
 import About from './components/About.tsx';
 import FAQ from './components/FAQ.tsx';
 import Contact from './components/Contact.tsx';
@@ -34,6 +35,7 @@ export default function App() {
           <Route path="/admin/settings" element={<AdminPlaceholder title="System Settings" />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/vehicles" element={<VehicleList />} />
+          <Route path="/catalog" element={<LightVehicleCatalog />} />
           <Route path="/about" element={<About />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/contact" element={<Contact />} />
