@@ -14,17 +14,26 @@ export default function SimpleHeader() {
           <span className="text-lg font-bold">VehiclesData</span>
         </Link>
         <div className="flex items-center space-x-6 text-sm font-medium">
-          <Link to="/catalog" className="hover:text-indigo-600">
-            Catalog
-          </Link>
-          <Link to="/inspector" className="hover:text-indigo-600">
-            Inspector
+          <Link to="/services" className="hover:text-indigo-600">
+            Services
           </Link>
           <Link to="/pricing" className="hover:text-indigo-600">
             Pricing
           </Link>
+          <Link to="/about" className="hover:text-indigo-600">
+            About
+          </Link>
+          <Link to="/faq" className="hover:text-indigo-600">
+            FAQs
+          </Link>
           <Link to="/login" className="hover:text-indigo-600">
             Login
+          </Link>
+          <Link
+            to="/signup"
+            className="px-4 py-2 rounded-md bg-indigo-600 text-white hover:bg-indigo-500 transition-colors"
+          >
+            Start Free Trial
           </Link>
         </div>
       </nav>
