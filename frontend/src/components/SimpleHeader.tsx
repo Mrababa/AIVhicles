@@ -20,6 +20,9 @@ export default function SimpleHeader() {
           <Link to="/inspector" className="hover:text-indigo-600">
             Inspector
           </Link>
+          <Link to="/pricing" className="hover:text-indigo-600">
+            Pricing
+          </Link>
           <Link to="/login" className="hover:text-indigo-600">
             Login
           </Link>
