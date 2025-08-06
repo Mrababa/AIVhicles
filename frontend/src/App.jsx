@@ -12,6 +12,7 @@ import About from './components/About.tsx';
 import FAQ from './components/FAQ.tsx';
 import Contact from './components/Contact.tsx';
 import { AuthProvider } from './contexts/AuthContext.jsx';
+import CarDamageEstimator from './components/CarDamageEstimator.jsx';
 
 /**
  * Root component handling application routes including the landing page.
@@ -39,6 +40,7 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/damage-estimator" element={<CarDamageEstimator />} />
         </Routes>
       </Router>
     </AuthProvider>
