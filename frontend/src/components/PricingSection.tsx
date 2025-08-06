@@ -20,7 +20,13 @@ export default function PricingSection() {
   const [plans, setPlans] = useState<Plan[]>([]);
 
   useEffect(() => {
-    axios.get('/api/plans/public').then((res) => setPlans(res.data));
+    axios
+      .get('/api/plans/public')
+      .then((res) => {
+        const data = res.data;
+        setPlans(Array.isArray(data) ? data : []);
+      })
+      .catch(() => setPlans([]));
   }, []);
 
   return (
