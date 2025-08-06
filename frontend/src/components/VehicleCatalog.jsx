@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import CatalogHeader from './CatalogHeader.jsx';
+import Header from './Header.tsx';
+import Footer from './Footer.tsx';
 import Spinner from './Spinner.jsx';
 import VehicleCard from './VehicleCard.jsx';
 import { MAKES, YEARS, CATEGORIES } from '../constants.ts';
@@ -67,15 +68,16 @@ export default function VehicleCatalog() {
   const resultCount = vehicles.length;
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-200">
-      <CatalogHeader />
-      <section className="px-4 py-6 text-center">
-        <h1 className="text-3xl font-bold mb-2">Vehicle Catalog</h1>
-        <p className="text-slate-600 dark:text-slate-400">Search, filter, and browse...</p>
-      </section>
+    <>
+      <Header />
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-200 pt-20">
+        <section className="max-w-7xl mx-auto px-4 py-6 text-center">
+          <h1 className="text-3xl font-bold mb-2">Vehicle Catalog</h1>
+          <p className="text-slate-600 dark:text-slate-400">Search, filter, and browse...</p>
+        </section>
 
-      <div className="sticky top-14 z-10 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-4 py-3">
-        <form onSubmit={handleSearch} className="grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
+        <div className="sticky top-20 z-10 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700">
+          <form onSubmit={handleSearch} className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
           <div className="relative md:col-span-2">
             <MagnifyingGlassIcon className="h-5 w-5 absolute left-2 top-1/2 -translate-y-1/2 text-slate-500" />
             <input
@@ -139,9 +141,9 @@ export default function VehicleCatalog() {
             </button>
           </div>
         </form>
-      </div>
+        </div>
 
-      <main className="px-4 py-6">
+        <main className="max-w-7xl mx-auto px-4 py-6">
         {loading ? (
           <div className="flex flex-col items-center">
             <Spinner />
@@ -188,7 +190,9 @@ export default function VehicleCatalog() {
             </div>
           </div>
         )}
-      </main>
-    </div>
+        </main>
+      </div>
+      <Footer />
+    </>
   );
 }
