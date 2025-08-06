@@ -15,8 +15,6 @@ import { AuthProvider } from './contexts/AuthContext.jsx';
 
 import AIVehicleInspector from './components/AIVehicleInspector.jsx';
 
-import CarDamageEstimator from './components/CarDamageEstimator.jsx';
-
 
 /**
  * Root component handling application routes including the landing page.
@@ -45,7 +43,7 @@ export default function App() {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/contact" element={<Contact />} />
 
-          <Route path="/ai-inspector" element={<AIVehicleInspector />} />
+          <Route path="/inspector" element={<AIVehicleInspector />} />
 
         </Routes>
       </Router>
