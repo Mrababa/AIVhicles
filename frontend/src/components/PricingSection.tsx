@@ -31,10 +31,11 @@ export default function PricingSection() {
 
   return (
     <section className="mt-16">
-      <h2 className="text-3xl font-bold text-center">Plans & Pricing</h2>
-      <div className="mt-8 grid gap-8 lg:grid-cols-3">
-        {plans.map((plan) => (
-          <div key={plan.id} className="flex flex-col p-8 rounded-2xl bg-white dark:bg-slate-800 shadow-lg">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-3xl font-bold tracking-tight text-center">Plans & Pricing</h2>
+        <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {plans.map((plan) => (
+          <div key={plan.id} className="flex flex-col p-8 rounded-2xl bg-white dark:bg-slate-800 shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
             <h3 className="text-2xl font-bold text-center">{plan.name}</h3>
             <div className="mt-6 text-center">
               <span className="text-5xl font-extrabold">${plan.price}</span>
@@ -50,12 +51,13 @@ export default function PricingSection() {
             </ul>
             <Link
               to="/signup"
-              className="mt-8 inline-block w-full text-center px-4 py-2 rounded-md font-semibold bg-indigo-600 text-white hover:bg-indigo-500"
+              className="mt-8 inline-block w-full text-center px-4 py-2 rounded-lg font-bold bg-indigo-600 text-white hover:bg-indigo-700 transition-colors"
             >
               {plan.ctaText}
             </Link>
           </div>
         ))}
+        </div>
       </div>
     </section>
   );
