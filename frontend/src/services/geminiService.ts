@@ -1,3 +1,4 @@
+
 export interface VehicleSpecs {
   [key: string]: string;
 }
@@ -125,4 +126,3 @@ function toBase64(file: File): Promise<string> {
     reader.readAsDataURL(file);
   });
 }
-
