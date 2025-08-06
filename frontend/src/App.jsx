@@ -5,6 +5,7 @@ import Login from './components/Login.jsx';
 import Signup from './components/Signup.jsx';
 import AdminDashboard from './components/AdminDashboard.jsx';
 import AdminPlaceholder from './components/AdminPlaceholder.jsx';
+import AdminPlans from './components/AdminPlans.jsx';
 import Logout from './components/Logout.jsx';
 import VehicleList from './components/VehicleList.jsx';
 import VehicleCatalog from './components/VehicleCatalog.jsx';
@@ -35,7 +36,7 @@ export default function App() {
           <Route path="/admin/catalog" element={<AdminPlaceholder title="Catalog Management" />} />
           <Route path="/admin/services" element={<AdminPlaceholder title="Services Control" />} />
           <Route path="/admin/logs" element={<AdminPlaceholder title="Logs & Audits" />} />
-          <Route path="/admin/plans" element={<AdminPlaceholder title="Plans & Pricing" />} />
+          <Route path="/admin/plans" element={<AdminPlans />} />
           <Route path="/admin/profile" element={<AdminPlaceholder title="My Profile" />} />
           <Route path="/admin/settings" element={<AdminPlaceholder title="System Settings" />} />
           <Route path="/logout" element={<Logout />} />

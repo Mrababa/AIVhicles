@@ -4,6 +4,7 @@ import HeroSection from './HeroSection.tsx';
 import FeaturesSection from './FeaturesSection.tsx';
 import DataStreamSection from './DataStreamSection.tsx';
 import TestimonialsSection from './TestimonialsSection.tsx';
+import PricingSection from './PricingSection.tsx';
 import FinalCTASection from './FinalCTASection.tsx';
 import Footer from './Footer.tsx';
 import { ContentProvider } from '../contexts/ContentContext.tsx';
@@ -20,6 +21,7 @@ export default function LandingPage() {
         <FeaturesSection />
         <DataStreamSection />
         <TestimonialsSection />
+        <PricingSection />
         <FinalCTASection />
       </main>
       <Footer />
