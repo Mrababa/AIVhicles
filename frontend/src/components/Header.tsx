@@ -26,14 +26,17 @@ export default function Header() {
           <span className="text-xl font-bold">VehiclesData</span>
         </Link>
         <div className="flex items-center space-x-6 text-sm font-semibold">
-          <Link to="/catalog" className="hover:text-indigo-600">
-            Catalog
-          </Link>
-          <Link to="/inspector" className="hover:text-indigo-600">
-            Inspector
+          <Link to="/services" className="hover:text-indigo-600">
+            Services
           </Link>
           <Link to="/pricing" className="hover:text-indigo-600">
             Pricing
+          </Link>
+          <Link to="/about" className="hover:text-indigo-600">
+            About
+          </Link>
+          <Link to="/faq" className="hover:text-indigo-600">
+            FAQs
           </Link>
           <Link to="/login" className="hover:text-indigo-600">
             Login
