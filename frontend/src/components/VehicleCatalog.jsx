@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import Header from './Header.tsx';
+import CatalogHeader from './CatalogHeader.jsx';
 import Footer from './Footer.tsx';
 import Spinner from './Spinner.jsx';
 import VehicleCard from './VehicleCard.jsx';
@@ -69,23 +69,24 @@ export default function VehicleCatalog() {
 
   return (
     <>
-      <Header />
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-200 pt-20">
-        <section className="max-w-7xl mx-auto px-4 py-6 text-center">
-          <h1 className="text-3xl font-bold mb-2">Vehicle Catalog</h1>
-          <p className="text-slate-600 dark:text-slate-400">Search, filter, and browse...</p>
+      <CatalogHeader />
+      <div className="min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-200">
+        <section className="max-w-7xl mx-auto px-4 py-8 text-center">
+          <h1 className="text-4xl font-extrabold tracking-tight">Vehicle Catalog</h1>
         </section>
 
-        <div className="sticky top-20 z-10 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700">
-          <form onSubmit={handleSearch} className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
+        <form
+          onSubmit={handleSearch}
+          className="sticky top-16 z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-4 items-end bg-white dark:bg-slate-800 rounded-xl shadow-md p-6"
+        >
           <div className="relative md:col-span-2">
-            <MagnifyingGlassIcon className="h-5 w-5 absolute left-2 top-1/2 -translate-y-1/2 text-slate-500" />
+            <MagnifyingGlassIcon className="h-5 w-5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
             <input
               name="search"
               value={filters.search}
               onChange={handleChange}
               placeholder="e.g., Land Cruiser"
-              className="w-full border rounded py-2 pl-8"
+              className="w-full rounded-md border border-slate-300 dark:border-slate-600 dark:bg-slate-700 py-2 pl-10 pr-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 placeholder-slate-400"
               type="text"
             />
           </div>
@@ -93,7 +94,7 @@ export default function VehicleCatalog() {
             name="make"
             value={filters.make}
             onChange={handleChange}
-            className="border rounded py-2 px-2"
+            className="rounded-md border border-slate-300 dark:border-slate-600 dark:bg-slate-700 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
           >
             <option value="">All Makes</option>
             {MAKES.map((m) => (
@@ -106,7 +107,7 @@ export default function VehicleCatalog() {
             name="year"
             value={filters.year}
             onChange={handleChange}
-            className="border rounded py-2 px-2"
+            className="rounded-md border border-slate-300 dark:border-slate-600 dark:bg-slate-700 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
           >
             <option value="">All Years</option>
             {YEARS.map((y) => (
@@ -119,7 +120,7 @@ export default function VehicleCatalog() {
             name="category"
             value={filters.category}
             onChange={handleChange}
-            className="border rounded py-2 px-2"
+            className="rounded-md border border-slate-300 dark:border-slate-600 dark:bg-slate-700 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
           >
             <option value="">All Categories</option>
             {CATEGORIES.map((c) => (
@@ -128,71 +129,74 @@ export default function VehicleCatalog() {
               </option>
             ))}
           </select>
-          <div className="flex gap-2 md:col-span-5">
-            <button type="submit" className="px-4 py-2 bg-indigo-600 text-white rounded">
+          <div className="flex gap-3 md:col-span-5 justify-end">
+            <button
+              type="submit"
+              className="px-4 py-2 rounded-md bg-indigo-600 text-white font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            >
               Search
             </button>
             <button
               type="button"
               onClick={handleClear}
-              className="px-4 py-2 bg-slate-200 dark:bg-slate-700 rounded"
+              className="px-4 py-2 rounded-md bg-slate-200 text-slate-700 dark:bg-slate-600 dark:text-slate-200 hover:bg-slate-300 dark:hover:bg-slate-500"
             >
               Clear
             </button>
           </div>
         </form>
-        </div>
 
         <main className="max-w-7xl mx-auto px-4 py-6">
-        {loading ? (
-          <div className="flex flex-col items-center">
-            <Spinner />
-            <p className="mt-4">Loading vehicles...</p>
-          </div>
-        ) : error ? (
-          <div className="border border-red-300 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-200 p-4 rounded">
-            {error}
-          </div>
-        ) : resultCount === 0 ? (
-          <div className="flex flex-col items-center py-12">
-            <MagnifyingGlassIcon className="h-16 w-16 text-slate-400" />
-            <h2 className="mt-4 text-xl font-semibold">No Vehicles Found</h2>
-            <p className="text-slate-500">Try adjusting your search criteria.</p>
-          </div>
-        ) : (
-          <div>
-            <div className="flex justify-between items-center mb-4">
-              <div>
-                Showing {resultCount} {resultCount === 1 ? 'result' : 'results'}
-              </div>
-              <div className="flex items-center gap-2">
-                <label htmlFor="sort" className="text-sm">
-                  Sort by:
-                </label>
-                <select
-                  id="sort"
-                  value={sort}
-                  onChange={(e) => setSort(e.target.value)}
-                  className="border rounded py-2 px-2"
-                >
-                  <option value="year_desc">Year: Newest First</option>
-                  <option value="year_asc">Year: Oldest First</option>
-                  <option value="make_asc">Make: A-Z</option>
-                  <option value="make_desc">Make: Z-A</option>
-                </select>
-              </div>
+          {loading ? (
+            <div className="flex flex-col items-center">
+              <Spinner />
+              <p className="mt-4">Loading vehicles...</p>
             </div>
+          ) : error ? (
+            <div className="rounded-md border border-red-200 bg-red-50 p-4 text-red-600 dark:border-red-700 dark:bg-red-900/20 dark:text-red-200">
+              {error}
+            </div>
+          ) : resultCount === 0 ? (
+            <div className="flex flex-col items-center py-12">
+              <MagnifyingGlassIcon className="h-16 w-16 text-slate-400" />
+              <h2 className="mt-4 text-xl font-semibold">No Vehicles Found</h2>
+              <p className="text-slate-500">Try adjusting your search criteria.</p>
+            </div>
+          ) : (
+            <div>
+              <div className="mb-6 flex items-center justify-between">
+                <p className="text-sm text-slate-600 dark:text-slate-400">
+                  Showing {resultCount} {resultCount === 1 ? 'vehicle' : 'vehicles'}
+                </p>
+                <div className="flex items-center gap-2">
+                  <label htmlFor="sort" className="text-sm">
+                    Sort by:
+                  </label>
+                  <select
+                    id="sort"
+                    value={sort}
+                    onChange={(e) => setSort(e.target.value)}
+                    className="rounded-md border border-slate-300 dark:border-slate-600 dark:bg-slate-700 py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  >
+                    <option value="year_desc">Year: Newest First</option>
+                    <option value="year_asc">Year: Oldest First</option>
+                    <option value="make_asc">Make: A-Z</option>
+                    <option value="make_desc">Make: Z-A</option>
+                  </select>
+                </div>
+              </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {sortedVehicles.map((v) => (
-                <VehicleCard key={v.id} vehicle={v} />)
-              )}
+              <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {sortedVehicles.map((v) => (
+                  <VehicleCard key={v.id} vehicle={v} />
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
         </main>
       </div>
       <Footer />
     </>
   );
 }
+
