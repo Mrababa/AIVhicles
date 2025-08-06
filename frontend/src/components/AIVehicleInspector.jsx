@@ -32,7 +32,7 @@ export default function AIVehicleInspector() {
       const res = await inspectVehicleFromImage(image);
       setResult(res);
     } catch (e) {
-      setError((e as Error).message || 'Could not get an estimate.');
+      setError(e instanceof Error ? e.message : 'Could not get an estimate.');
     } finally {
       setLoading(false);
     }
