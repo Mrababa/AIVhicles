@@ -22,7 +22,13 @@ export default function AdminPlans() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      axios.get('/api/plans').then((res) => setPlans(res.data));
+      axios
+        .get('/api/plans')
+        .then((res) => {
+          const data = res.data;
+          setPlans(Array.isArray(data) ? data : []);
+        })
+        .catch(() => setPlans([]));
     }
   }, [isAuthenticated]);
 
