@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext.jsx';
 import ImageUploader from './ImageUploader.jsx';
 import VehicleDetailsDisplay from './VehicleDetailsDisplay.jsx';
 import DamageReportDisplay from './DamageReportDisplay.jsx';
@@ -8,18 +6,13 @@ import Spinner from './Spinner.jsx';
 import { inspectVehicleFromImage } from '../services/geminiService.ts';
 
 /**
- * Page allowing authenticated users to upload an image and get an AI inspection report.
+ * Page allowing users to upload an image and get an AI inspection report.
  */
 export default function AIVehicleInspector() {
-  const { isAuthenticated } = useAuth();
   const [image, setImage] = useState(null);
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-
-  if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
-  }
 
   const handleSubmit = async () => {
     if (!image) {
