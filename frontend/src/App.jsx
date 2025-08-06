@@ -12,6 +12,7 @@ import AboutUsPage from './components/AboutUsPage.tsx';
 import FAQ from './components/FAQ.tsx';
 import Contact from './components/Contact.tsx';
 import PricingPage from './components/PricingPage.tsx';
+import ServicesPage from './components/ServicesPage.tsx';
 import { AuthProvider } from './contexts/AuthContext.jsx';
 
 import AIVehicleInspector from './components/AIVehicleInspector.jsx';
@@ -43,6 +44,7 @@ export default function App() {
           <Route path="/about" element={<AboutUsPage />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/services" element={<ServicesPage />} />
           <Route path="/pricing" element={<PricingPage />} />
 
           <Route path="/inspector" element={<AIVehicleInspector />} />
