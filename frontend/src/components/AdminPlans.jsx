@@ -1,181 +1,151 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useAuth } from '../contexts/AuthContext.jsx';
+import React, { useContext, useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext.jsx';
+import { ContentContext } from '../contexts/ContentContext.tsx';
 import AdminHeader from './AdminHeader.jsx';
 
 /**
- * Admin interface for managing pricing plans.
+ * Admin interface for editing pricing plan content.
  */
 export default function AdminPlans() {
   const { isAuthenticated } = useAuth();
-  const [plans, setPlans] = useState([]);
-  const [form, setForm] = useState({
-    id: null,
-    name: '',
-    price: '',
-    billingPeriod: 'month',
-    features: '',
-    ctaText: '',
-    visible: true,
-  });
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      axios
-        .get('/api/plans')
-        .then((res) => {
-          const data = res.data;
-          setPlans(Array.isArray(data) ? data : []);
-        })
-        .catch(() => setPlans([]));
-    }
-  }, [isAuthenticated]);
+  const { content, setContent } = useContext(ContentContext);
+  const [pricingTiers, setPricingTiers] = useState(() =>
+    content.pricingTiers.map((t) => ({
+      ...t,
+      features: t.features.join(', '),
+    }))
+  );
+  const [isSaved, setIsSaved] = useState(false);
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setForm((f) => ({ ...f, [name]: type === 'checkbox' ? checked : value }));
+  const handleChange = (index, field, value) => {
+    setPricingTiers((prev) => {
+      const updated = [...prev];
+      updated[index] = { ...updated[index], [field]: value };
+      return updated;
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const payload = {
-      name: form.name,
-      price: parseFloat(form.price),
-      billingPeriod: form.billingPeriod,
-      features: form.features.split(',').map((s) => s.trim()),
-      ctaText: form.ctaText,
-      visible: form.visible,
-    };
-    if (form.id) {
-      axios.put(`/api/plans/${form.id}`, payload).then((res) => {
-        setPlans((prev) => prev.map((p) => (p.id === form.id ? res.data : p)));
-        setForm({ id: null, name: '', price: '', billingPeriod: 'month', features: '', ctaText: '', visible: true });
-      });
-    } else {
-      axios.post('/api/plans', payload).then((res) => {
-        setPlans((prev) => [...prev, res.data]);
-        setForm({ id: null, name: '', price: '', billingPeriod: 'month', features: '', ctaText: '', visible: true });
-      });
-    }
-  };
-
-  const editPlan = (plan) => {
-    setForm({
-      id: plan.id,
-      name: plan.name,
-      price: plan.price,
-      billingPeriod: plan.billingPeriod,
-      features: plan.features.join(', '),
-      ctaText: plan.ctaText,
-      visible: plan.visible,
-    });
-  };
-
-  const deletePlan = (id) => {
-    axios.delete(`/api/plans/${id}`).then(() => {
-      setPlans((prev) => prev.filter((p) => p.id !== id));
-    });
+    const updated = pricingTiers.map((t) => ({
+      ...t,
+      features: t.features
+        .split(',')
+        .map((f) => f.trim())
+        .filter(Boolean),
+    }));
+    setContent({ ...content, pricingTiers: updated });
+    setIsSaved(true);
+    setTimeout(() => setIsSaved(false), 3000);
   };
 
   return (
     <div className="min-h-screen bg-slate-100 dark:bg-slate-900">
       <AdminHeader />
       <main className="p-8">
-        <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-100">Plans & Pricing</h1>
-        <form onSubmit={handleSubmit} className="mt-6 space-y-4 max-w-xl">
-          <input
-            name="name"
-            value={form.name}
-            onChange={handleChange}
-            required
-            placeholder="Plan name"
-            className="w-full p-2 border rounded"
-          />
-          <div className="flex space-x-4">
-            <input
-              name="price"
-              type="number"
-              value={form.price}
-              onChange={handleChange}
-              required
-              placeholder="Price"
-              className="w-1/2 p-2 border rounded"
-            />
-            <input
-              name="billingPeriod"
-              value={form.billingPeriod}
-              onChange={handleChange}
-              required
-              placeholder="Billing period"
-              className="w-1/2 p-2 border rounded"
-            />
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="flex justify-between items-center border-b pb-4">
+            <h1 className="text-3xl font-bold">Plans Management</h1>
+            <div className="flex items-center space-x-4">
+              {isSaved && (
+                <p className="text-green-600">Plans saved successfully!</p>
+              )}
+              <button
+                type="submit"
+                className="px-4 py-2 rounded-lg font-bold bg-indigo-600 text-white hover:bg-indigo-700 transition-colors"
+              >
+                Save Changes
+              </button>
+            </div>
           </div>
-          <input
-            name="features"
-            value={form.features}
-            onChange={handleChange}
-            required
-            placeholder="Features (comma separated)"
-            className="w-full p-2 border rounded"
-          />
-          <input
-            name="ctaText"
-            value={form.ctaText}
-            onChange={handleChange}
-            required
-            placeholder="CTA text"
-            className="w-full p-2 border rounded"
-          />
-          <label className="flex items-center space-x-2">
-            <input
-              type="checkbox"
-              name="visible"
-              checked={form.visible}
-              onChange={handleChange}
-            />
-            <span>Visible</span>
-          </label>
-          <button
-            type="submit"
-            className="px-4 py-2 rounded bg-indigo-600 text-white"
-          >
-            {form.id ? 'Update Plan' : 'Add Plan'}
-          </button>
+
+          <div className="grid gap-6 lg:grid-cols-3">
+            {pricingTiers.map((tier, idx) => (
+              <div
+                key={idx}
+                className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow space-y-4"
+              >
+                <h2 className="text-xl font-bold">{tier.name}</h2>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    value={tier.name}
+                    onChange={(e) => handleChange(idx, 'name', e.target.value)}
+                    className="block w-full rounded-md border-gray-300 dark:border-slate-600 shadow-sm dark:bg-slate-700 focus:border-indigo-500 focus:ring-indigo-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+                    Price
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="$49 or Custom"
+                    value={tier.price}
+                    onChange={(e) => handleChange(idx, 'price', e.target.value)}
+                    className="block w-full rounded-md border-gray-300 dark:border-slate-600 shadow-sm dark:bg-slate-700 focus:border-indigo-500 focus:ring-indigo-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+                    Description
+                  </label>
+                  <textarea
+                    rows={3}
+                    value={tier.description}
+                    onChange={(e) => handleChange(idx, 'description', e.target.value)}
+                    className="block w-full rounded-md border-gray-300 dark:border-slate-600 shadow-sm dark:bg-slate-700 focus:border-indigo-500 focus:ring-indigo-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+                    Features (comma separated)
+                  </label>
+                  <textarea
+                    rows={4}
+                    value={tier.features}
+                    onChange={(e) => handleChange(idx, 'features', e.target.value)}
+                    className="block w-full rounded-md border-gray-300 dark:border-slate-600 shadow-sm dark:bg-slate-700 focus:border-indigo-500 focus:ring-indigo-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+                    CTA Text
+                  </label>
+                  <input
+                    type="text"
+                    value={tier.cta}
+                    onChange={(e) => handleChange(idx, 'cta', e.target.value)}
+                    className="block w-full rounded-md border-gray-300 dark:border-slate-600 shadow-sm dark:bg-slate-700 focus:border-indigo-500 focus:ring-indigo-500"
+                  />
+                </div>
+                <div className="flex items-center">
+                  <input
+                    id={`popular-${idx}`}
+                    type="checkbox"
+                    checked={tier.popular}
+                    onChange={(e) => handleChange(idx, 'popular', e.target.checked)}
+                    className="h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                  />
+                  <label
+                    htmlFor={`popular-${idx}`}
+                    className="ml-2 block text-sm text-slate-700 dark:text-slate-300"
+                  >
+                    Mark as Popular
+                  </label>
+                </div>
+              </div>
+            ))}
+          </div>
         </form>
-        <ul className="mt-8 space-y-4">
-          {plans.map((plan) => (
-            <li
-              key={plan.id}
-              className="p-4 bg-white dark:bg-slate-800 rounded shadow flex justify-between"
-            >
-              <div>
-                <h3 className="font-semibold">{plan.name}</h3>
-                <p className="text-sm">
-                  ${plan.price}/{plan.billingPeriod}
-                </p>
-              </div>
-              <div className="space-x-2">
-                <button
-                  onClick={() => editPlan(plan)}
-                  className="px-2 py-1 text-sm rounded bg-slate-200"
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => deletePlan(plan.id)}
-                  className="px-2 py-1 text-sm rounded bg-red-500 text-white"
-                >
-                  Delete
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
       </main>
     </div>
   );
