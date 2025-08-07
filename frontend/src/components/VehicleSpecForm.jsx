@@ -14,6 +14,8 @@ export default function VehicleSpecForm() {
   const { id } = useParams();
   const isEdit = Boolean(id);
 
+  // Specification object bound to the form fields. This structure mirrors
+  // the payload expected by the backend specification API.
   const [spec, setSpec] = useState({
     make: '',
     model: '',
@@ -26,6 +28,8 @@ export default function VehicleSpecForm() {
   });
   const [activeTab, setActiveTab] = useState('core');
 
+  // When editing an existing record, fetch its data so the form is populated
+  // with current values. Creating a new spec skips this step.
   useEffect(() => {
     if (isEdit) {
       // Load existing specification details from the API when editing.
@@ -33,10 +37,14 @@ export default function VehicleSpecForm() {
     }
   }, [id, isEdit]);
 
+  // Generic field updater used for all inputs in both tabs.
   function handleChange(e) {
     setSpec({ ...spec, [e.target.name]: e.target.value });
   }
 
+  // Persist the specification using the appropriate service call. The backend
+  // is expected to handle creation vs. update and return validation errors if
+  // any fields are invalid.
   async function handleSubmit(status) {
     // Prepare payload and call appropriate service method based on mode.
     const payload = { ...spec, status };

@@ -20,6 +20,9 @@ export default function VehicleSpecsDashboard() {
       .catch(() => setSpecs([]));
   }, []);
 
+  // Derive a filtered list client-side to avoid extra API calls when the user
+  // adjusts search criteria. The backend is only hit on initial load or when
+  // a spec is created/edited.
   const filtered = useMemo(() => {
     return specs.filter((s) => {
       const matchesSearch =
@@ -32,11 +35,13 @@ export default function VehicleSpecsDashboard() {
     });
   }, [specs, search, regionFilter, yearFilter]);
 
+  // Generate unique lists of regions and years for filter dropdown options.
   const regions = Array.from(new Set(specs.map((s) => s.region)));
   const years = Array.from(new Set(specs.map((s) => s.year))).sort();
 
   function exportToCSV() {
     // Client-side CSV export of the currently filtered specifications.
+    // Backend should eventually provide a dedicated export endpoint.
     const headers = ['Year', 'Make', 'Model', 'Trim', 'Region', 'Status', 'Last Updated'];
     const rows = filtered.map((s) => [
       s.year,

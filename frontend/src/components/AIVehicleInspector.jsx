@@ -9,11 +9,16 @@ import { inspectVehicleFromImage } from '../services/geminiService.ts';
  * Page allowing users to upload an image and get an AI inspection report.
  */
 export default function AIVehicleInspector() {
+  // Stores the selected image and the AI's response. These pieces of state
+  // drive the conditional UI rendering below.
   const [image, setImage] = useState(null);
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
+  // Sends the selected image to the Gemini service. Backend developers can
+  // replace `inspectVehicleFromImage` with a server-side proxy to keep API
+  // keys hidden from the client.
   const handleSubmit = async () => {
     if (!image) {
       setError('Please upload an image of the vehicle.');
@@ -31,6 +36,8 @@ export default function AIVehicleInspector() {
     }
   };
 
+  // Resets the component to its initial state so another image can be
+  // uploaded and inspected.
   const reset = () => {
     setImage(null);
     setResult(null);

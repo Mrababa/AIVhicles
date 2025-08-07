@@ -14,13 +14,18 @@ import { MAKES, YEARS, CATEGORIES } from '../constants.ts';
  * used in `fetchVehicles`.
  */
 export default function VehicleCatalog() {
+  // Filters used by the search form. The backend should support these query
+  // params so the UI and API stay in sync.
   const initialFilters = { search: '', make: '', year: '', category: '' };
   const [filters, setFilters] = useState(initialFilters);
+  // Holds vehicles returned from the backend based on the filters above.
   const [vehicles, setVehicles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [sort, setSort] = useState('year_desc');
 
+  // Calls the backend catalog endpoint with the supplied parameters and
+  // stores the resulting vehicle list. Any errors are surfaced to the user.
   const fetchVehicles = async (params = {}) => {
     setLoading(true);
     setError('');
@@ -38,25 +43,31 @@ export default function VehicleCatalog() {
     }
   };
 
+  // Initial fetch on mount to populate the page with all vehicles.
   useEffect(() => {
     fetchVehicles(initialFilters);
   }, []);
 
+  // Update local filter state as the user changes form controls.
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFilters((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Submit current filter values to the API to refresh the results.
   const handleSearch = (e) => {
     e.preventDefault();
     fetchVehicles(filters);
   };
 
+  // Reset filters to their defaults and refetch all data.
   const handleClear = () => {
     setFilters(initialFilters);
     fetchVehicles(initialFilters);
   };
 
+  // Client-side sorting of the returned vehicles so the backend only needs to
+  // provide filtering, not ordered results.
   const sortedVehicles = useMemo(() => {
     const arr = [...vehicles];
     switch (sort) {
@@ -72,6 +83,7 @@ export default function VehicleCatalog() {
     }
   }, [vehicles, sort]);
 
+  // Displayed count used in the UI for quick feedback to the user.
   const resultCount = vehicles.length;
 
   return (
