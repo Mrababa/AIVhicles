@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import SimpleHeader from './SimpleHeader.tsx';
+import Header from './Header.tsx';
 import Footer from './Footer.tsx';
 import { IdentificationIcon, CameraIcon, RectangleStackIcon, BanknotesIcon } from './Icons.tsx';
 import HeroSection from './HeroSection.tsx';
@@ -43,7 +43,7 @@ const services = [
 export default function ServicesPage() {
   return (
     <div className="flex flex-col min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100">
-      <SimpleHeader />
+      <Header />
       <HeroSection short showContent={false} />
       <main className="flex-grow">
         <div className="container mx-auto px-4 py-16">

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
-import SimpleHeader from './SimpleHeader.tsx';
+import Header from './Header.tsx';
 import Footer from './Footer.tsx';
 import { ContentContext } from '../contexts/ContentContext.tsx';
 import HeroSection from './HeroSection.tsx';
@@ -15,7 +15,7 @@ export default function PricingPage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100">
-      <SimpleHeader />
+      <Header />
       <HeroSection short showContent={false} />
       <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Intro */}
