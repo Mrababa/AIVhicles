@@ -2,6 +2,7 @@ import React from 'react';
 import SimpleHeader from './SimpleHeader.tsx';
 import Footer from './Footer.tsx';
 import TeamMemberCard from './TeamMemberCard.tsx';
+import HeroSection from './HeroSection.tsx';
 
 /**
  * Public about page introducing the VehiclesData team and mission.
@@ -28,6 +29,7 @@ export default function AboutUsPage() {
   return (
     <div className="flex flex-col min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100">
       <SimpleHeader />
+      <HeroSection short showContent={false} />
       <main className="flex-grow py-16 px-4">
         <div className="max-w-4xl mx-auto bg-white dark:bg-slate-800 rounded-lg shadow-lg p-8 md:p-12">
           {/* Introductory Section */}

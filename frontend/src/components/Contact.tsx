@@ -7,6 +7,7 @@ import {
   PhoneIcon,
   PaperAirplaneIcon,
 } from '@heroicons/react/24/outline';
+import HeroSection from './HeroSection.tsx';
 
 /**
  * Contact page with split layout form and contact details.
@@ -35,6 +36,7 @@ export default function Contact() {
   return (
     <>
       <SimpleHeader />
+      <HeroSection short showContent={false} />
       <main className="max-w-6xl mx-auto px-4 py-24 text-slate-700 dark:text-slate-300">
         <div className="bg-white dark:bg-slate-800 rounded-lg shadow-lg">
           <div className="grid md:grid-cols-2">
