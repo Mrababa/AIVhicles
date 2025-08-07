@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { PlusIcon, PencilIcon } from '@heroicons/react/24/outline';
 import { getSpecifications } from '../services/specService';
+import VehicleSpecsFilterBar from './VehicleSpecsFilterBar';
 
 /**
  * Admin dashboard listing vehicle specifications with search and filter controls.
@@ -33,49 +34,61 @@ export default function VehicleSpecsDashboard() {
   const regions = Array.from(new Set(specs.map((s) => s.region)));
   const years = Array.from(new Set(specs.map((s) => s.year))).sort();
 
+  function exportToCSV() {
+    const headers = ['Year', 'Make', 'Model', 'Trim', 'Region', 'Status', 'Last Updated'];
+    const rows = filtered.map((s) => [
+      s.year,
+      s.make,
+      s.model,
+      s.trim,
+      s.region,
+      s.status,
+      new Date(s.lastUpdated).toISOString(),
+    ]);
+    const csv = [headers, ...rows].map((r) => r.join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'vehicle-specifications.csv';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  }
+
   return (
     <div>
       <div className="mb-4 flex items-center justify-between">
         <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
           Vehicle Specifications
         </h1>
-        <Link
-          to="/admin/specs/add"
-          className="flex items-center rounded-lg bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700"
-        >
-          <PlusIcon className="mr-2 h-5 w-5" /> Add Specification
-        </Link>
+        <div className="flex gap-2">
+          <button
+            onClick={exportToCSV}
+            className="rounded-lg bg-slate-200 px-4 py-2 font-medium hover:bg-slate-300"
+          >
+            Export CSV
+          </button>
+          <Link
+            to="/admin/specs/add"
+            className="flex items-center rounded-lg bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700"
+          >
+            <PlusIcon className="mr-2 h-5 w-5" /> Add Specification
+          </Link>
+        </div>
       </div>
 
-      <div className="mb-4 flex flex-col gap-4 sm:flex-row">
-        <input
-          type="text"
-          placeholder="Search make, model, or trim"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-full rounded-md border border-slate-300 px-3 py-2"
-        />
-        <select
-          value={regionFilter}
-          onChange={(e) => setRegionFilter(e.target.value)}
-          className="rounded-md border border-slate-300 px-3 py-2"
-        >
-          <option>All</option>
-          {regions.map((r) => (
-            <option key={r}>{r}</option>
-          ))}
-        </select>
-        <select
-          value={yearFilter}
-          onChange={(e) => setYearFilter(e.target.value)}
-          className="rounded-md border border-slate-300 px-3 py-2"
-        >
-          <option>All</option>
-          {years.map((y) => (
-            <option key={y}>{y}</option>
-          ))}
-        </select>
-      </div>
+      <VehicleSpecsFilterBar
+        search={search}
+        setSearch={setSearch}
+        regionFilter={regionFilter}
+        setRegionFilter={setRegionFilter}
+        yearFilter={yearFilter}
+        setYearFilter={setYearFilter}
+        regions={regions}
+        years={years}
+      />
 
       {filtered.length === 0 ? (
         <p className="text-slate-600 dark:text-slate-300">No specifications found.</p>
