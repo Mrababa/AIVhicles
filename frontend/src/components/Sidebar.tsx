@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import {
   HomeIcon,
@@ -15,6 +15,8 @@ import {
   CameraIcon,
   BuildingOffice2Icon,
   ClipboardDocumentListIcon,
+  ChevronDownIcon,
+  ChevronRightIcon,
 } from '@heroicons/react/24/outline';
 import LogoIcon from './LogoIcon.jsx';
 
@@ -62,6 +64,13 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
     },
   ];
 
+  const [openSections, setOpenSections] = useState<Record<string, boolean>>(
+    () => sections.reduce((acc, section) => ({ ...acc, [section.title]: true }), {})
+  );
+
+  const toggleSection = (title: string) =>
+    setOpenSections((prev) => ({ ...prev, [title]: !prev[title] }));
+
   return (
     <aside
       className={`fixed inset-y-0 left-0 z-30 w-64 transform bg-slate-800 text-slate-100 transition-transform duration-200 ease-in-out lg:static lg:translate-x-0 ${open ? 'translate-x-0' : '-translate-x-full'}`}
@@ -75,20 +84,31 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
       <nav className="mt-4 px-2">
         {sections.map((section) => (
           <div key={section.title} className="mt-6 first:mt-0">
-            <h2 className="px-3 text-xs font-semibold text-slate-400">{section.title}</h2>
-            {section.links.map((link) => (
-              <NavLink
-                key={link.name}
-                to={link.to}
-                onClick={onClose}
-                className={({ isActive }) =>
-                  `mt-1 flex items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-slate-700 hover:text-white ${isActive ? 'bg-indigo-600 text-white' : 'text-slate-300'}`
-                }
-              >
-                <link.icon className="mr-3 h-5 w-5" />
-                {link.name}
-              </NavLink>
-            ))}
+            <h2
+              className="px-3 text-xs font-semibold text-slate-400 flex items-center justify-between cursor-pointer"
+              onClick={() => toggleSection(section.title)}
+            >
+              {section.title}
+              {openSections[section.title] ? (
+                <ChevronDownIcon className="h-4 w-4" />
+              ) : (
+                <ChevronRightIcon className="h-4 w-4" />
+              )}
+            </h2>
+            {openSections[section.title] &&
+              section.links.map((link) => (
+                <NavLink
+                  key={link.name}
+                  to={link.to}
+                  onClick={onClose}
+                  className={({ isActive }) =>
+                    `mt-1 flex items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-slate-700 hover:text-white ${isActive ? 'bg-indigo-600 text-white' : 'text-slate-300'}`
+                  }
+                >
+                  <link.icon className="mr-3 h-5 w-5" />
+                  {link.name}
+                </NavLink>
+              ))}
           </div>
         ))}
       </nav>
