@@ -28,6 +28,7 @@ export default function VehicleSpecForm() {
 
   useEffect(() => {
     if (isEdit) {
+      // Load existing specification details from the API when editing.
       getSpecification(id).then((data) => setSpec(data));
     }
   }, [id, isEdit]);
@@ -37,6 +38,7 @@ export default function VehicleSpecForm() {
   }
 
   async function handleSubmit(status) {
+    // Prepare payload and call appropriate service method based on mode.
     const payload = { ...spec, status };
     if (isEdit) {
       await updateSpecification(id, payload);

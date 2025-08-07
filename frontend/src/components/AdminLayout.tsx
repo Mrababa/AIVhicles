@@ -3,6 +3,10 @@ import { Outlet } from 'react-router-dom';
 import AdminHeader from './AdminHeader';
 import Sidebar from './Sidebar';
 
+/**
+ * Top-level layout for all admin pages. Handles the collapsible sidebar
+ * navigation and renders the active admin route via <Outlet />.
+ */
 export default function AdminLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 

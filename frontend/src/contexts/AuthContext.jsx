@@ -2,6 +2,9 @@ import React, { createContext, useContext, useState } from 'react';
 
 /**
  * Authentication context providing simple login state management.
+ * Currently stores auth state only on the client; real implementations
+ * should swap the `login` and `logout` stubs with API calls and store
+ * tokens or session data as needed.
  */
 const AuthContext = createContext({
   isAuthenticated: false,

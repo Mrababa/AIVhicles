@@ -8,6 +8,11 @@ interface AdminHeaderProps {
   onMenuClick: () => void;
 }
 
+/**
+ * Header displayed on admin pages. Contains menu toggle, branding and
+ * a user dropdown with logout functionality that informs the backend
+ * via the AuthContext.
+ */
 export default function AdminHeader({ onMenuClick }: AdminHeaderProps) {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);

@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 /**
- * Displays vehicles retrieved from the backend API.
+ * Displays vehicles retrieved from the backend API. A JWT token is read from
+ * localStorage and sent as a Bearer token, illustrating how authenticated
+ * requests should be made once the backend implements auth.
  */
 export default function VehicleList() {
   const [vehicles, setVehicles] = useState([]);
@@ -10,6 +12,7 @@ export default function VehicleList() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     axios
+      // Authenticated request to fetch all vehicles for the logged-in user.
       .get('http://localhost:8080/api/vehicles', {
         headers: { Authorization: `Bearer ${token}` },
       })

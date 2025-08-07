@@ -7,6 +7,12 @@ import {
   ChevronRightIcon,
 } from '@heroicons/react/24/outline';
 
+/**
+ * Admin interface for managing client organizations. Currently relies on
+ * local mock data but outlines the UI flows for listing, creating and
+ * deleting clients which the backend will later persist.
+ */
+
 interface Client {
   id: number;
   name: string;
@@ -17,6 +23,8 @@ interface Client {
   apiUsage: { current: number; limit: number };
 }
 
+// Dummy client data displayed in lieu of a real API. Backend
+// implementation will provide CRUD operations for these records.
 const initialClients: Client[] = [
   {
     id: 1,

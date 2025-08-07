@@ -14,6 +14,7 @@ export default function VehicleSpecsDashboard() {
   const [yearFilter, setYearFilter] = useState('All');
 
   useEffect(() => {
+    // Initial load of all specs from the backend API.
     getSpecifications()
       .then((data) => setSpecs(Array.isArray(data) ? data : []))
       .catch(() => setSpecs([]));
@@ -35,6 +36,7 @@ export default function VehicleSpecsDashboard() {
   const years = Array.from(new Set(specs.map((s) => s.year))).sort();
 
   function exportToCSV() {
+    // Client-side CSV export of the currently filtered specifications.
     const headers = ['Year', 'Make', 'Model', 'Trim', 'Region', 'Status', 'Last Updated'];
     const rows = filtered.map((s) => [
       s.year,
