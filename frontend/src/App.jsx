@@ -4,10 +4,12 @@ import LandingPage from './components/LandingPage.tsx';
 import Login from './components/Login.jsx';
 import Signup from './components/Signup.jsx';
 import AdminDashboard from './components/AdminDashboard.jsx';
-import AdminPlaceholder from './components/AdminPlaceholder.jsx';
 import AdminPlans from './components/AdminPlans.jsx';
 import AdminContent from './components/AdminContent.jsx';
 import AdminLayout from './components/AdminLayout.tsx';
+import AdminUsers from './components/AdminUsers.jsx';
+import AdminRoles from './components/AdminRoles.jsx';
+import AdminPlaceholder from './components/AdminPlaceholder.jsx';
 import Logout from './components/Logout.jsx';
 import VehicleList from './components/VehicleList.jsx';
 import VehicleCatalog from './components/VehicleCatalog.jsx';
@@ -37,7 +39,8 @@ export default function App() {
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<Navigate to="dashboard" replace />} />
               <Route path="dashboard" element={<AdminDashboard />} />
-              <Route path="users" element={<AdminPlaceholder title="Users Management" />} />
+              <Route path="users" element={<AdminUsers />} />
+              <Route path="roles" element={<AdminRoles />} />
               <Route path="catalog" element={<AdminPlaceholder title="Catalog Management" />} />
               <Route path="services" element={<AdminPlaceholder title="Services Control" />} />
               <Route path="logs" element={<AdminPlaceholder title="Logs & Audits" />} />
