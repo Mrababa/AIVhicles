@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Bars3Icon, UserCircleIcon, ArrowRightOnRectangleIcon } from '@heroicons/react/24/outline';
 import { useAuth } from '../contexts/AuthContext.jsx';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import LogoIcon from './LogoIcon.jsx';
 
 interface AdminHeaderProps {
   onMenuClick: () => void;
@@ -30,15 +31,23 @@ export default function AdminHeader({ onMenuClick }: AdminHeaderProps) {
 
   return (
     <header className="sticky top-0 z-10 flex h-16 items-center justify-between bg-white px-4 shadow dark:bg-slate-800">
-      <button
-        type="button"
-        onClick={onMenuClick}
-        className="p-2 text-slate-700 hover:text-indigo-600 focus:outline-none lg:hidden"
-        aria-label="Open sidebar"
-      >
-        <Bars3Icon className="h-6 w-6" />
-      </button>
-      <div className="ml-auto relative" ref={dropdownRef}>
+      <div className="flex items-center space-x-4">
+        <button
+          type="button"
+          onClick={onMenuClick}
+          className="p-2 text-slate-700 hover:text-indigo-600 focus:outline-none lg:hidden"
+          aria-label="Open sidebar"
+        >
+          <Bars3Icon className="h-6 w-6" />
+        </button>
+        <Link to="/" className="flex items-center space-x-2">
+          <LogoIcon className="h-6 w-6 text-indigo-500" />
+          <span className="text-lg font-bold text-slate-900 dark:text-white">
+            VehiclesData
+          </span>
+        </Link>
+      </div>
+      <div className="relative" ref={dropdownRef}>
         <button
           type="button"
           onClick={() => setOpen((o) => !o)}

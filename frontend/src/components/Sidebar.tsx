@@ -3,9 +3,13 @@ import { NavLink } from 'react-router-dom';
 import {
   HomeIcon,
   RectangleStackIcon,
-  KeyIcon,
-  CpuChipIcon,
   Cog6ToothIcon,
+  UserGroupIcon,
+  WrenchScrewdriverIcon,
+  QueueListIcon,
+  CreditCardIcon,
+  DocumentTextIcon,
+  UserCircleIcon,
 } from '@heroicons/react/24/outline';
 import LogoIcon from './LogoIcon.jsx';
 
@@ -23,16 +27,20 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
       ],
     },
     {
-      title: 'TOOLS',
+      title: 'MANAGEMENT',
       links: [
-        { name: 'Catalog', to: '/catalog', icon: RectangleStackIcon },
-        { name: 'VIN Decoder', to: '/vin-decoder', icon: KeyIcon },
-        { name: 'AI Inspector', to: '/inspector', icon: CpuChipIcon },
+        { name: 'Users', to: '/admin/users', icon: UserGroupIcon },
+        { name: 'Catalog', to: '/admin/catalog', icon: RectangleStackIcon },
+        { name: 'Services', to: '/admin/services', icon: WrenchScrewdriverIcon },
+        { name: 'Logs', to: '/admin/logs', icon: QueueListIcon },
+        { name: 'Plans', to: '/admin/plans', icon: CreditCardIcon },
+        { name: 'Content', to: '/admin/content', icon: DocumentTextIcon },
       ],
     },
     {
       title: 'ACCOUNT',
       links: [
+        { name: 'Profile', to: '/admin/profile', icon: UserCircleIcon },
         { name: 'Settings', to: '/admin/settings', icon: Cog6ToothIcon },
       ],
     },
