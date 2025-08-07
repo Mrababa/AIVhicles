@@ -34,6 +34,8 @@ import VinDecoderPage from './components/VinDecoderPage.tsx';
  */
 export default function App() {
   return (
+    {/* AuthProvider and ContentProvider expose global state such as the
+        logged-in user and editable marketing copy to all nested routes. */}
     <AuthProvider>
       <ContentProvider>
         <Router>

@@ -7,12 +7,16 @@ import { useAuth } from '../contexts/AuthContext.jsx';
  * Simple signup form for free trial demonstration.
  */
 export default function Signup() {
+  // Track signup form fields locally. On submission these will be
+  // forwarded to the backend to create a user record.
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const auth = useAuth();
 
+  // Mock signup that simply logs a user into context. Replace this with a
+  // POST to an account creation endpoint and handle returned tokens.
   const handleSubmit = (e) => {
     e.preventDefault();
     if (name && email && password) {

@@ -16,17 +16,23 @@ const SAMPLE_VIN = '1HGCM82633A004352';
 
 /** VIN Decoder marketing page */
 export default function VinDecoderPage() {
+  // User-entered VIN value and decode request state. `data` holds the API
+  // response once decoding succeeds.
   const [vin, setVin] = useState('');
   const [status, setStatus] = useState<'initial' | 'loading' | 'success' | 'error'>('initial');
   const [data, setData] = useState<VinDecodeResult | null>(null);
+  // Tracks whether the external logo lookup failed so we can fallback.
   const [logoFailed, setLogoFailed] = useState(false);
 
+  // Reset the logo failure flag whenever a new make is decoded so the UI can
+  // attempt to load the corresponding brand image.
   useEffect(() => {
     setLogoFailed(false);
   }, [data?.make]);
-
+  // When exactly 17 characters are present we allow the decode request.
   const ready = vin.length === 17 && status !== 'loading';
 
+  // Ensure VINs are uppercase and limit to 17 characters expected by the API.
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.toUpperCase().slice(0, 17);
     setVin(value);
@@ -35,6 +41,7 @@ export default function VinDecoderPage() {
     }
   };
 
+  // Submit VIN to backend decoder service and update UI with response.
   const handleDecode = async () => {
     setStatus('loading');
     try {

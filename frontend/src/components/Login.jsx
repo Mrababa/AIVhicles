@@ -7,16 +7,21 @@ import { useAuth } from '../contexts/AuthContext.jsx';
  * Admin login form with hardcoded credential check.
  */
 export default function Login() {
+  // Local form state for the user's credentials. In a real implementation
+  // these values would be sent to a backend authentication endpoint.
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const auth = useAuth();
 
+  // Basic credential check which should eventually be replaced with a call
+  // to a secure login API that returns a token or session cookie.
   const handleSubmit = (e) => {
     e.preventDefault();
     if (email === 'admin@example.com' && password === 'admin') {
       auth.login();
+      // After successful authentication redirect to the admin portal.
       navigate('/admin');
     } else {
       setError('Invalid email or password');
