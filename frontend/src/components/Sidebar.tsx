@@ -9,6 +9,7 @@ import {
   QueueListIcon,
   CreditCardIcon,
   DocumentTextIcon,
+  ShieldCheckIcon,
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
 import LogoIcon from './LogoIcon.jsx';
@@ -30,6 +31,7 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
       title: 'MANAGEMENT',
       links: [
         { name: 'Users', to: '/admin/users', icon: UserGroupIcon },
+        { name: 'Roles', to: '/admin/roles', icon: ShieldCheckIcon },
         { name: 'Catalog', to: '/admin/catalog', icon: RectangleStackIcon },
         { name: 'Services', to: '/admin/services', icon: WrenchScrewdriverIcon },
         { name: 'Logs', to: '/admin/logs', icon: QueueListIcon },
