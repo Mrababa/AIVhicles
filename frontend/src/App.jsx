@@ -22,6 +22,7 @@ import { AuthProvider } from './contexts/AuthContext.jsx';
 import { ContentProvider } from './contexts/ContentContext.tsx';
 
 import AIVehicleInspector from './components/AIVehicleInspector.jsx';
+import VinDecoderPage from './components/VinDecoderPage.tsx';
 
 
 /**
@@ -57,6 +58,7 @@ export default function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/pricing" element={<PricingPage />} />
+            <Route path="/vin-decoder" element={<VinDecoderPage />} />
             <Route path="/inspector" element={<AIVehicleInspector />} />
           </Routes>
         </Router>
