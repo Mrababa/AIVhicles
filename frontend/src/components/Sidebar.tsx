@@ -13,6 +13,7 @@ import {
   UserCircleIcon,
   IdentificationIcon,
   CameraIcon,
+  BuildingOffice2Icon,
 } from '@heroicons/react/24/outline';
 import LogoIcon from './LogoIcon.jsx';
 
@@ -34,6 +35,7 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
       links: [
         { name: 'Users', to: '/admin/users', icon: UserGroupIcon },
         { name: 'Roles', to: '/admin/roles', icon: ShieldCheckIcon },
+        { name: 'Clients', to: '/admin/clients', icon: BuildingOffice2Icon },
         { name: 'Catalog', to: '/admin/catalog', icon: RectangleStackIcon },
         { name: 'Services', to: '/admin/services', icon: WrenchScrewdriverIcon },
         { name: 'Logs', to: '/admin/logs', icon: QueueListIcon },
