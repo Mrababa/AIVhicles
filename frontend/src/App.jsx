@@ -12,6 +12,8 @@ import AdminRoles from './components/AdminRoles.jsx';
 import AdminPlaceholder from './components/AdminPlaceholder.jsx';
 import AdminClients from './components/AdminClients.tsx';
 import Logout from './components/Logout.jsx';
+import VehicleSpecsDashboard from './components/VehicleSpecsDashboard.jsx';
+import VehicleSpecForm from './components/VehicleSpecForm.jsx';
 import VehicleList from './components/VehicleList.jsx';
 import VehicleCatalog from './components/VehicleCatalog.jsx';
 import AboutUsPage from './components/AboutUsPage.tsx';
@@ -49,6 +51,9 @@ export default function App() {
               <Route path="logs" element={<AdminPlaceholder title="Logs & Audits" />} />
               <Route path="plans" element={<AdminPlans />} />
               <Route path="content" element={<AdminContent />} />
+              <Route path="specs" element={<VehicleSpecsDashboard />} />
+              <Route path="specs/add" element={<VehicleSpecForm />} />
+              <Route path="specs/edit/:id" element={<VehicleSpecForm />} />
               <Route path="profile" element={<AdminPlaceholder title="My Profile" />} />
               <Route path="settings" element={<AdminPlaceholder title="System Settings" />} />
             </Route>
