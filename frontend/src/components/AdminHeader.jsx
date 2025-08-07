@@ -24,6 +24,7 @@ export default function AdminHeader() {
     { name: 'Services Control', href: '/admin/services' },
     { name: 'Logs & Audits', href: '/admin/logs' },
     { name: 'Plans & Pricing', href: '/admin/plans' },
+    { name: 'Content Management', href: '/admin/content' },
   ];
 
   return (
