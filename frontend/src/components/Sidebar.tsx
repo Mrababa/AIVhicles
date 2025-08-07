@@ -14,6 +14,7 @@ import {
   IdentificationIcon,
   CameraIcon,
   BuildingOffice2Icon,
+  ClipboardDocumentListIcon,
 } from '@heroicons/react/24/outline';
 import LogoIcon from './LogoIcon.jsx';
 
@@ -41,6 +42,7 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
         { name: 'Logs', to: '/admin/logs', icon: QueueListIcon },
         { name: 'Plans', to: '/admin/plans', icon: CreditCardIcon },
         { name: 'Content', to: '/admin/content', icon: DocumentTextIcon },
+        { name: 'Vehicle Specs', to: '/admin/specs', icon: ClipboardDocumentListIcon },
       ],
     },
     {
