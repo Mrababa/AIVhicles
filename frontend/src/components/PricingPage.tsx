@@ -1,35 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
 import SimpleHeader from './SimpleHeader.tsx';
 import Footer from './Footer.tsx';
-import axios from 'axios';
-
-interface Plan {
-  id: number;
-  name: string;
-  price: number;
-  billingPeriod: string;
-  features: string[];
-  ctaText: string;
-  visible: boolean;
-}
+import { ContentContext } from '../contexts/ContentContext.tsx';
 
 /**
  * Marketing pricing page showing plan cards and feature comparison table.
  */
 export default function PricingPage() {
-  const [plans, setPlans] = useState<Plan[]>([]);
-
-  useEffect(() => {
-    axios
-      .get('/api/plans/public')
-      .then((res) => {
-        const data = res.data;
-        setPlans(Array.isArray(data) ? data : []);
-      })
-      .catch(() => setPlans([]));
-  }, []);
+  const { content } = useContext(ContentContext);
+  const plans = content.pricingTiers;
 
   return (
     <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100">
@@ -49,14 +30,21 @@ export default function PricingPage() {
         <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {plans.map((plan) => (
             <div
-              key={plan.id}
-              className="flex flex-col p-8 rounded-2xl bg-white dark:bg-slate-800 shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+              key={plan.name}
+              className={`flex flex-col p-8 rounded-2xl bg-white dark:bg-slate-800 shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${plan.popular ? 'border-2 border-indigo-600' : ''}`}
             >
+              {plan.popular && (
+                <span className="mb-4 self-center px-3 py-1 text-sm font-medium text-white bg-indigo-600 rounded-full">
+                  Popular
+                </span>
+              )}
               <h3 className="text-2xl font-bold text-center">{plan.name}</h3>
               <div className="mt-6 text-center">
-                <span className="text-5xl font-extrabold">${plan.price}</span>
-                <span className="text-lg font-medium text-slate-500">/{plan.billingPeriod}</span>
+                <span className="text-5xl font-extrabold">{plan.price}</span>
               </div>
+              <p className="mt-4 text-center text-slate-600 dark:text-slate-300">
+                {plan.description}
+              </p>
               <ul className="mt-8 space-y-4">
                 {plan.features.map((f) => (
                   <li key={f} className="flex items-start">
@@ -69,7 +57,7 @@ export default function PricingPage() {
                 to="/signup"
                 className="mt-8 inline-block w-full text-center px-4 py-2 rounded-lg font-bold bg-indigo-600 text-white hover:bg-indigo-700 transition-colors"
               >
-                {plan.ctaText}
+                {plan.cta}
               </Link>
             </div>
           ))}
