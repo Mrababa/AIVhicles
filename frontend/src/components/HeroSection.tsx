@@ -5,6 +5,9 @@ import { ContentContext } from '../contexts/ContentContext.tsx';
 interface HeroSectionProps {
   short?: boolean;
   showContent?: boolean;
+  title?: string;
+  subtitle?: string;
+  showCTA?: boolean;
 }
 
 /**
@@ -13,8 +16,13 @@ interface HeroSectionProps {
 export default function HeroSection({
   short = false,
   showContent = true,
+  title,
+  subtitle,
+  showCTA = true,
 }: HeroSectionProps) {
   const { headline, tagline } = useContext(ContentContext);
+  const heading = title ?? headline;
+  const subtext = subtitle ?? tagline;
 
   return (
     <section
@@ -27,22 +35,24 @@ export default function HeroSection({
       />
       {showContent && (
         <div className="max-w-4xl mx-auto p-8 text-center text-white">
-          <h1 className="text-5xl md:text-7xl font-extrabold">{headline}</h1>
-          <p className="mt-6 text-lg md:text-xl">{tagline}</p>
-          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              to="/catalog"
-              className="px-8 py-4 bg-white text-indigo-700 font-semibold rounded-md shadow"
-            >
-              Explore Catalog
-            </Link>
-            <Link
-              to="/inspector"
-              className="px-8 py-4 bg-indigo-600 hover:bg-indigo-500 font-semibold rounded-md"
-            >
-              Try Inspector
-            </Link>
-          </div>
+          <h1 className="text-5xl md:text-7xl font-extrabold">{heading}</h1>
+          {subtext && <p className="mt-6 text-lg md:text-xl">{subtext}</p>}
+          {showCTA && (
+            <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                to="/catalog"
+                className="px-8 py-4 bg-white text-indigo-700 font-semibold rounded-md shadow"
+              >
+                Explore Catalog
+              </Link>
+              <Link
+                to="/inspector"
+                className="px-8 py-4 bg-indigo-600 hover:bg-indigo-500 font-semibold rounded-md"
+              >
+                Try Inspector
+              </Link>
+            </div>
+          )}
         </div>
       )}
     </section>
