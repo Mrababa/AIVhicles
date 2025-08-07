@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext.jsx';
 import { ContentContext } from '../contexts/ContentContext.tsx';
-import AdminHeader from './AdminHeader.jsx';
 
 /**
  * Admin interface for managing static site content across pages.
@@ -58,10 +57,7 @@ export default function AdminContent() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 dark:bg-slate-900">
-      <AdminHeader />
-      <main className="p-8">
-        <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-6">
           <div className="flex justify-between items-center border-b pb-4">
             <h1 className="text-3xl font-bold">Content Management</h1>
             <div className="flex items-center space-x-4">
@@ -357,8 +353,6 @@ export default function AdminContent() {
               ))}
             </div>
           )}
-        </form>
-      </main>
-    </div>
+    </form>
   );
 }

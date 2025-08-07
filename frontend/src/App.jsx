@@ -7,6 +7,7 @@ import AdminDashboard from './components/AdminDashboard.jsx';
 import AdminPlaceholder from './components/AdminPlaceholder.jsx';
 import AdminPlans from './components/AdminPlans.jsx';
 import AdminContent from './components/AdminContent.jsx';
+import AdminLayout from './components/AdminLayout.tsx';
 import Logout from './components/Logout.jsx';
 import VehicleList from './components/VehicleList.jsx';
 import VehicleCatalog from './components/VehicleCatalog.jsx';
@@ -33,16 +34,18 @@ export default function App() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
-            <Route path="/admin/dashboard" element={<AdminDashboard />} />
-            <Route path="/admin/users" element={<AdminPlaceholder title="Users Management" />} />
-            <Route path="/admin/catalog" element={<AdminPlaceholder title="Catalog Management" />} />
-            <Route path="/admin/services" element={<AdminPlaceholder title="Services Control" />} />
-            <Route path="/admin/logs" element={<AdminPlaceholder title="Logs & Audits" />} />
-            <Route path="/admin/plans" element={<AdminPlans />} />
-            <Route path="/admin/content" element={<AdminContent />} />
-            <Route path="/admin/profile" element={<AdminPlaceholder title="My Profile" />} />
-            <Route path="/admin/settings" element={<AdminPlaceholder title="System Settings" />} />
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route index element={<Navigate to="dashboard" replace />} />
+              <Route path="dashboard" element={<AdminDashboard />} />
+              <Route path="users" element={<AdminPlaceholder title="Users Management" />} />
+              <Route path="catalog" element={<AdminPlaceholder title="Catalog Management" />} />
+              <Route path="services" element={<AdminPlaceholder title="Services Control" />} />
+              <Route path="logs" element={<AdminPlaceholder title="Logs & Audits" />} />
+              <Route path="plans" element={<AdminPlans />} />
+              <Route path="content" element={<AdminContent />} />
+              <Route path="profile" element={<AdminPlaceholder title="My Profile" />} />
+              <Route path="settings" element={<AdminPlaceholder title="System Settings" />} />
+            </Route>
             <Route path="/logout" element={<Logout />} />
             <Route path="/vehicles" element={<VehicleList />} />
             <Route path="/catalog" element={<VehicleCatalog />} />
