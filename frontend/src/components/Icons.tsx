@@ -1,3 +1,23 @@
-import { IdentificationIcon, CameraIcon, RectangleStackIcon, BanknotesIcon } from '@heroicons/react/24/outline';
+import {
+  IdentificationIcon,
+  CameraIcon,
+  RectangleStackIcon,
+  BanknotesIcon,
+  GlobeAltIcon,
+  TruckIcon,
+  FireIcon,
+  Cog6ToothIcon,
+  ExclamationTriangleIcon,
+} from '@heroicons/react/24/outline';
 
-export { IdentificationIcon, CameraIcon, RectangleStackIcon, BanknotesIcon };
+export {
+  IdentificationIcon,
+  CameraIcon,
+  RectangleStackIcon,
+  BanknotesIcon,
+  GlobeAltIcon,
+  TruckIcon,
+  FireIcon,
+  Cog6ToothIcon,
+  ExclamationTriangleIcon,
+};
