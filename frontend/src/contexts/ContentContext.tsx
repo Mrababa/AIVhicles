@@ -158,7 +158,34 @@ export const ContentContext = createContext<ContentContextValue>({
 export function ContentProvider({ children }: { children: ReactNode }) {
   const [content, setContentState] = useState<ContentData>(() => {
     const stored = localStorage.getItem('content');
-    return stored ? JSON.parse(stored) : defaultContent;
+    if (!stored) {
+      return defaultContent;
+    }
+
+    const parsed = JSON.parse(stored);
+    return {
+      ...defaultContent,
+      ...parsed,
+      features: parsed.features || defaultContent.features,
+      about: {
+        ...defaultContent.about,
+        ...parsed.about,
+        team: parsed.about?.team || defaultContent.about.team,
+      },
+      contact: {
+        ...defaultContent.contact,
+        ...parsed.contact,
+      },
+      careers: {
+        ...defaultContent.careers,
+        ...parsed.careers,
+      },
+      legal: {
+        ...defaultContent.legal,
+        ...parsed.legal,
+        sections: parsed.legal?.sections || defaultContent.legal.sections,
+      },
+    };
   });
 
   const setContent = (data: ContentData) => {
