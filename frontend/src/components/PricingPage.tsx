@@ -13,24 +13,19 @@ export default function PricingPage() {
   const { content } = useContext(ContentContext);
   const plans = content.pricingTiers;
 
-  return (
-    <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100">
-      <Header />
-      <HeroSection short showContent={false} />
-      <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* Intro */}
-        <div className="max-w-3xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
-            Flexible Plans for Every Business
-          </h1>
-          <p className="mt-4 text-lg">
-            Choose the plan that fits your needs and scale as you grow.
-          </p>
-        </div>
-
-        {/* Pricing tiers */}
-        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {plans.map((plan) => (
+    return (
+      <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100">
+        <Header />
+        <HeroSection
+          short
+          title="Flexible Plans for Every Business"
+          subtitle="Choose the plan that fits your needs and scale as you grow."
+          showCTA={false}
+        />
+        <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          {/* Pricing tiers */}
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {plans.map((plan) => (
             <div
               key={plan.name}
               className={`flex flex-col p-8 rounded-2xl bg-white dark:bg-slate-800 shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${plan.popular ? 'border-2 border-indigo-600' : ''}`}

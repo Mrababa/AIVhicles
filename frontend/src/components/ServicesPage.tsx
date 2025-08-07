@@ -44,20 +44,16 @@ export default function ServicesPage() {
   return (
     <div className="flex flex-col min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100">
       <Header />
-      <HeroSection short showContent={false} />
+      <HeroSection
+        short
+        title="Our Services"
+        subtitle="Discover the suite of tools VehiclesData offers to streamline vehicle research and analysis."
+        showCTA={false}
+      />
       <main className="flex-grow">
         <div className="container mx-auto px-4 py-16">
-          {/* Introductory Section */}
-          <section className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl font-extrabold">Our Services</h1>
-            <p className="mt-4">
-              Discover the suite of tools VehiclesData offers to streamline vehicle research
-              and analysis.
-            </p>
-          </section>
-
           {/* Services Grid */}
-          <section className="mt-12 grid gap-8 md:grid-cols-2">
+          <section className="grid gap-8 md:grid-cols-2">
             {services.map((service) => (
               <div
                 key={service.title}
