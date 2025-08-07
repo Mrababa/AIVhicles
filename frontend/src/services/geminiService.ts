@@ -1,4 +1,8 @@
-
+/**
+ * Client-side helper for calling the Gemini vision model. The backend should
+ * ideally proxy these requests so API keys are not exposed to the browser.
+ * Returns structured vehicle information and optional damage estimates.
+ */
 export interface VehicleSpecs {
   [key: string]: string;
 }
@@ -98,6 +102,8 @@ export async function inspectVehicleFromImage(file: File): Promise<AIInspectionR
   };
 
   const res = await fetch(
+    // Direct call to Google's Generative Language API.
+    // Consider routing through the backend to avoid exposing API keys.
     `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
     {
       method: 'POST',
@@ -114,6 +120,7 @@ export async function inspectVehicleFromImage(file: File): Promise<AIInspectionR
   return JSON.parse(text);
 }
 
+// Utility to convert a File to a base64 string for API submission.
 function toBase64(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();

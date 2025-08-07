@@ -1,3 +1,4 @@
+// Interface describing the data returned by the VIN decoder API.
 export interface VinDecodeResult {
   year: number;
   make: string;
@@ -12,7 +13,9 @@ export interface VinDecodeResult {
 }
 
 /**
- * Decodes a VIN and returns structured vehicle information.
+ * Calls the backend VIN decoding endpoint and returns structured vehicle
+ * information. Backend should validate the VIN and supply additional
+ * fields like valuation and engine details.
  */
 export async function decodeVin(vin: string): Promise<VinDecodeResult> {
   const res = await fetch(`/api/vin/decode?vin=${encodeURIComponent(vin)}`);

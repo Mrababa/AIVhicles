@@ -27,10 +27,11 @@ import { ContentProvider } from './contexts/ContentContext.tsx';
 import AIVehicleInspector from './components/AIVehicleInspector.jsx';
 import VinDecoderPage from './components/VinDecoderPage.tsx';
 
-
 /**
- * Root component handling application routes including the landing page.
-*/
+ * Root component establishing application routes and context providers.
+ * Each route renders a page component which may interact with backend APIs
+ * through services located in `src/services`.
+ */
 export default function App() {
   return (
     <AuthProvider>

@@ -5,6 +5,12 @@ import React, {
   useState,
 } from 'react';
 
+/**
+ * Context storing editable marketing content for the public site.
+ * Values are persisted to localStorage to simulate a backing API until
+ * the real content management endpoints are implemented.
+ */
+
 interface PricingTier {
   name: string;
   price: string;
@@ -156,6 +162,8 @@ export const ContentContext = createContext<ContentContextValue>({
 });
 
 export function ContentProvider({ children }: { children: ReactNode }) {
+  // Load any previously saved content from localStorage. This mimics
+  // fetching initial data from an API when the admin panel first loads.
   const [content, setContentState] = useState<ContentData>(() => {
     const stored = localStorage.getItem('content');
     if (!stored) {
@@ -188,11 +196,14 @@ export function ContentProvider({ children }: { children: ReactNode }) {
     };
   });
 
+  // Update local state and persist changes so refreshes keep the edits.
   const setContent = (data: ContentData) => {
     setContentState(data);
     localStorage.setItem('content', JSON.stringify(data));
   };
 
+  // Whenever content changes propagate it to localStorage. The eventual
+  // backend implementation will replace this with an API call.
   useEffect(() => {
     localStorage.setItem('content', JSON.stringify(content));
   }, [content]);

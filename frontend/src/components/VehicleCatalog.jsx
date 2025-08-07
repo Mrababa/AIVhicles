@@ -7,7 +7,12 @@ import Spinner from './Spinner.jsx';
 import VehicleCard from './VehicleCard.jsx';
 import { MAKES, YEARS, CATEGORIES } from '../constants.ts';
 
-/** Main vehicle catalog page with advanced search and filtering */
+/**
+ * Main vehicle catalog page with advanced search and filtering. Queries
+ * the backend `/api/vehicles/catalog` endpoint with selected filters and
+ * displays the results. The backend should support the same query params
+ * used in `fetchVehicles`.
+ */
 export default function VehicleCatalog() {
   const initialFilters = { search: '', make: '', year: '', category: '' };
   const [filters, setFilters] = useState(initialFilters);
@@ -20,6 +25,8 @@ export default function VehicleCatalog() {
     setLoading(true);
     setError('');
     try {
+      // Query backend with current filter params. The API should return a list
+      // of vehicles matching the criteria.
       const res = await axios.get('http://localhost:8080/api/vehicles/catalog', { params });
       const data = res.data.data || res.data;
       setVehicles(data);
