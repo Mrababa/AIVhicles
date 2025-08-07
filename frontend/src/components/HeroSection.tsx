@@ -26,8 +26,8 @@ export default function HeroSection({
 
   return (
     <section
-      className={`relative flex items-center justify-center ${
-        short ? 'h-64' : 'min-h-screen'
+      className={`relative flex justify-center ${
+        short ? 'h-64 pt-20 items-start' : 'min-h-screen items-center'
       }`}
     >
       <div
