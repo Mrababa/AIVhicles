@@ -11,6 +11,8 @@ import {
   DocumentTextIcon,
   ShieldCheckIcon,
   UserCircleIcon,
+  IdentificationIcon,
+  CameraIcon,
 } from '@heroicons/react/24/outline';
 import LogoIcon from './LogoIcon.jsx';
 
@@ -37,6 +39,14 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
         { name: 'Logs', to: '/admin/logs', icon: QueueListIcon },
         { name: 'Plans', to: '/admin/plans', icon: CreditCardIcon },
         { name: 'Content', to: '/admin/content', icon: DocumentTextIcon },
+      ],
+    },
+    {
+      title: 'FEATURES',
+      links: [
+        { name: 'VIN Decoder', to: '/vin-decoder', icon: IdentificationIcon },
+        { name: 'Catalog', to: '/catalog', icon: RectangleStackIcon },
+        { name: 'AI Vehicle Inspector', to: '/inspector', icon: CameraIcon },
       ],
     },
     {
