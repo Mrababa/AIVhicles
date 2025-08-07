@@ -10,6 +10,7 @@ import AdminLayout from './components/AdminLayout.tsx';
 import AdminUsers from './components/AdminUsers.jsx';
 import AdminRoles from './components/AdminRoles.jsx';
 import AdminPlaceholder from './components/AdminPlaceholder.jsx';
+import AdminClients from './components/AdminClients.tsx';
 import Logout from './components/Logout.jsx';
 import VehicleList from './components/VehicleList.jsx';
 import VehicleCatalog from './components/VehicleCatalog.jsx';
@@ -42,6 +43,7 @@ export default function App() {
               <Route path="dashboard" element={<AdminDashboard />} />
               <Route path="users" element={<AdminUsers />} />
               <Route path="roles" element={<AdminRoles />} />
+              <Route path="clients" element={<AdminClients />} />
               <Route path="catalog" element={<AdminPlaceholder title="Catalog Management" />} />
               <Route path="services" element={<AdminPlaceholder title="Services Control" />} />
               <Route path="logs" element={<AdminPlaceholder title="Logs & Audits" />} />
