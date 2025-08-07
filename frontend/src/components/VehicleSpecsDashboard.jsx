@@ -13,7 +13,9 @@ export default function VehicleSpecsDashboard() {
   const [yearFilter, setYearFilter] = useState('All');
 
   useEffect(() => {
-    getSpecifications().then(setSpecs).catch(() => setSpecs([]));
+    getSpecifications()
+      .then((data) => setSpecs(Array.isArray(data) ? data : []))
+      .catch(() => setSpecs([]));
   }, []);
 
   const filtered = useMemo(() => {
