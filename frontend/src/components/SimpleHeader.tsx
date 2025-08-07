@@ -23,6 +23,9 @@ export default function SimpleHeader() {
           <Link to="/about" className="hover:text-indigo-600">
             About
           </Link>
+          <Link to="/contact" className="hover:text-indigo-600">
+            Contact Us
+          </Link>
           <Link to="/faq" className="hover:text-indigo-600">
             FAQs
           </Link>

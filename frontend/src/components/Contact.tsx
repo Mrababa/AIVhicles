@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import SimpleHeader from './SimpleHeader.tsx';
+import Header from './Header.tsx';
 import Footer from './Footer.tsx';
 import {
   MapPinIcon,
@@ -35,7 +35,7 @@ export default function Contact() {
 
   return (
     <>
-      <SimpleHeader />
+      <Header />
       <HeroSection short showContent={false} />
       <main className="max-w-6xl mx-auto px-4 py-24 text-slate-700 dark:text-slate-300">
         <div className="bg-white dark:bg-slate-800 rounded-lg shadow-lg">
