@@ -30,23 +30,31 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
   const sections = [
     {
       title: 'MAIN',
-      links: [
-        { name: 'Dashboard', to: '/admin/dashboard', icon: HomeIcon },
-      ],
+      links: [{ name: 'Dashboard', to: '/admin/dashboard', icon: HomeIcon }],
     },
     {
-      title: 'MANAGEMENT',
+      title: 'PEOPLE',
       links: [
         { name: 'Users', to: '/admin/users', icon: UserGroupIcon },
         { name: 'Roles', to: '/admin/roles', icon: ShieldCheckIcon },
         { name: 'Clients', to: '/admin/clients', icon: BuildingOffice2Icon },
         { name: 'Partners', to: '/admin/partners', icon: HandThumbUpIcon },
+      ],
+    },
+    {
+      title: 'OPERATIONS',
+      links: [
         { name: 'Catalog', to: '/admin/catalog', icon: RectangleStackIcon },
         { name: 'Services', to: '/admin/services', icon: WrenchScrewdriverIcon },
+        { name: 'Vehicle Specs', to: '/admin/specs', icon: ClipboardDocumentListIcon },
         { name: 'Logs', to: '/admin/logs', icon: QueueListIcon },
+      ],
+    },
+    {
+      title: 'BUSINESS',
+      links: [
         { name: 'Plans', to: '/admin/plans', icon: CreditCardIcon },
         { name: 'Content', to: '/admin/content', icon: DocumentTextIcon },
-        { name: 'Vehicle Specs', to: '/admin/specs', icon: ClipboardDocumentListIcon },
       ],
     },
     {
