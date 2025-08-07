@@ -6,6 +6,11 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      colors: {
+        indigo: {
+          600: 'rgb(67 56 200)',
+        },
+      },
       keyframes: {
         'background-pan': {
           '0%': { backgroundPosition: '0% 50%' },
