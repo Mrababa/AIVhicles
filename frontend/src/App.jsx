@@ -20,8 +20,12 @@ import VehicleCatalog from './components/VehicleCatalog.jsx';
 import MastersDashboard from './components/MastersDashboard.jsx';
 import ManageMakes from './components/ManageMakes.jsx';
 import MakeForm from './components/MakeForm.jsx';
-import ManageVehicleTypes from './components/ManageVehicleTypes.jsx';
-import VehicleTypeForm from './components/VehicleTypeForm.jsx';
+import AdminVehicleTypesPage from './components/AdminVehicleTypesPage.tsx';
+import AdminVehicleTypeFormPage from './components/AdminVehicleTypeFormPage.tsx';
+import AdminBodyTypesPage from './components/AdminBodyTypesPage.tsx';
+import AdminBodyTypeFormPage from './components/AdminBodyTypeFormPage.tsx';
+import AdminModelsPage from './components/AdminModelsPage.tsx';
+import AdminModelFormPage from './components/AdminModelFormPage.tsx';
 import AboutUsPage from './components/AboutUsPage.tsx';
 import FAQ from './components/FAQ.tsx';
 import Contact from './components/Contact.tsx';
@@ -65,9 +69,15 @@ export default function App() {
               <Route path="specs/add" element={<VehicleSpecForm />} />
               <Route path="specs/edit/:id" element={<VehicleSpecForm />} />
               <Route path="masters" element={<MastersDashboard />} />
-              <Route path="masters/vehicle-types" element={<ManageVehicleTypes />} />
-              <Route path="masters/vehicle-types/add" element={<VehicleTypeForm />} />
-              <Route path="masters/vehicle-types/edit/:id" element={<VehicleTypeForm />} />
+              <Route path="masters/vehicle-types" element={<AdminVehicleTypesPage />} />
+              <Route path="masters/vehicle-types/add" element={<AdminVehicleTypeFormPage />} />
+              <Route path="masters/vehicle-types/edit/:id" element={<AdminVehicleTypeFormPage />} />
+              <Route path="masters/body-types" element={<AdminBodyTypesPage />} />
+              <Route path="masters/body-types/add" element={<AdminBodyTypeFormPage />} />
+              <Route path="masters/body-types/edit/:id" element={<AdminBodyTypeFormPage />} />
+              <Route path="masters/models" element={<AdminModelsPage />} />
+              <Route path="masters/models/add" element={<AdminModelFormPage />} />
+              <Route path="masters/models/edit/:id" element={<AdminModelFormPage />} />
               <Route path="masters/makes" element={<ManageMakes />} />
               <Route path="masters/makes/add" element={<MakeForm />} />
               <Route path="masters/makes/edit/:id" element={<MakeForm />} />

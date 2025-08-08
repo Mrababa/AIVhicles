@@ -22,13 +22,13 @@ export default function MastersDashboard() {
       key: 'models',
       name: 'Models',
       description: 'Specific vehicle models',
-      enabled: false,
+      enabled: true,
     },
     {
       key: 'vehicle-types',
       name: 'Vehicle Types',
       description: 'e.g., Light, Motorcycle, EV',
-      enabled: false,
+      enabled: true,
     },
     {
       key: 'trims',
@@ -40,7 +40,7 @@ export default function MastersDashboard() {
       key: 'body-types',
       name: 'Body Types',
       description: 'e.g., SUV, Sedan, Coupe',
-      enabled: false,
+      enabled: true,
     },
     {
       key: 'model-years',
