@@ -18,6 +18,7 @@ import {
   ClipboardDocumentListIcon,
   ChevronDownIcon,
   ChevronRightIcon,
+  TableCellsIcon,
 } from '@heroicons/react/24/outline';
 import LogoIcon from './LogoIcon.jsx';
 
@@ -44,6 +45,7 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
     {
       title: 'OPERATIONS',
       links: [
+        { name: 'Masters', to: '/admin/masters', icon: TableCellsIcon },
         { name: 'Catalog', to: '/admin/catalog', icon: RectangleStackIcon },
         { name: 'Services', to: '/admin/services', icon: WrenchScrewdriverIcon },
         { name: 'Vehicle Specs', to: '/admin/specs', icon: ClipboardDocumentListIcon },

@@ -17,6 +17,9 @@ import VehicleSpecsDashboard from './components/VehicleSpecsDashboard.jsx';
 import VehicleSpecForm from './components/VehicleSpecForm.jsx';
 import VehicleList from './components/VehicleList.jsx';
 import VehicleCatalog from './components/VehicleCatalog.jsx';
+import MastersDashboard from './components/MastersDashboard.jsx';
+import ManageMakes from './components/ManageMakes.jsx';
+import MakeForm from './components/MakeForm.jsx';
 import AboutUsPage from './components/AboutUsPage.tsx';
 import FAQ from './components/FAQ.tsx';
 import Contact from './components/Contact.tsx';
@@ -59,6 +62,10 @@ export default function App() {
               <Route path="specs" element={<VehicleSpecsDashboard />} />
               <Route path="specs/add" element={<VehicleSpecForm />} />
               <Route path="specs/edit/:id" element={<VehicleSpecForm />} />
+              <Route path="masters" element={<MastersDashboard />} />
+              <Route path="masters/makes" element={<ManageMakes />} />
+              <Route path="masters/makes/add" element={<MakeForm />} />
+              <Route path="masters/makes/edit/:id" element={<MakeForm />} />
               <Route path="profile" element={<AdminPlaceholder title="My Profile" />} />
               <Route path="settings" element={<AdminPlaceholder title="System Settings" />} />
             </Route>
