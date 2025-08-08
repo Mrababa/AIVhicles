@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import LandingPage from './components/LandingPage.tsx';
 import Login from './components/Login.jsx';
 import Signup from './components/Signup.jsx';
-import AdminDashboard from './components/AdminDashboard.jsx';
+import AdminDashboard from './components/AdminDashboard.tsx';
 import AdminPlans from './components/AdminPlans.jsx';
 import AdminContent from './components/AdminContent.jsx';
 import AdminLayout from './components/AdminLayout.tsx';
