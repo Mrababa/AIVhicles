@@ -1,39 +1,36 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { sampleMakes, sampleVehicleTypes } from './mastersData';
+import { sampleVehicleTypes } from './mastersData';
 
 /**
- * Management page for vehicle makes.
- * Provides a filter bar and table listing all makes.
+ * Management page for vehicle types.
+ * Provides a filter bar and table listing all vehicle types.
  */
-export default function ManageMakes() {
+export default function ManageVehicleTypes() {
   const [search, setSearch] = useState('');
   const [status, setStatus] = useState('all');
-  const [type, setType] = useState('all');
 
-  const filtered = sampleMakes.filter((m) => {
+  const filtered = sampleVehicleTypes.filter((t) => {
     const term = search.toLowerCase();
     const matchesSearch =
-      m.nameEn.toLowerCase().includes(term) ||
-      m.nameAr.toLowerCase().includes(term);
+      t.nameEn.toLowerCase().includes(term) ||
+      t.nameAr.toLowerCase().includes(term);
     const matchesStatus =
-      status === 'all' || (status === 'active' ? m.active : !m.active);
-    const matchesType =
-      type === 'all' || m.vehicleTypes.includes(Number(type));
-    return matchesSearch && matchesStatus && matchesType;
+      status === 'all' || (status === 'active' ? t.active : !t.active);
+    return matchesSearch && matchesStatus;
   });
 
   return (
     <div>
       <div className="mb-4 flex items-center justify-between">
         <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
-          Manage Makes
+          Manage Vehicle Types
         </h1>
         <Link
-          to="/admin/masters/makes/add"
+          to="/admin/masters/vehicle-types/add"
           className="rounded-lg bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700"
         >
-          + Create New Make
+          + Create New
         </Link>
       </div>
 
@@ -54,18 +51,6 @@ export default function ManageMakes() {
           <option value="active">Active</option>
           <option value="inactive">Inactive</option>
         </select>
-        <select
-          value={type}
-          onChange={(e) => setType(e.target.value)}
-          className="w-full rounded border border-slate-300 px-3 py-2 focus:border-indigo-500 sm:w-48"
-        >
-          <option value="all">All Vehicle Types</option>
-          {sampleVehicleTypes.map((vt) => (
-            <option key={vt.id} value={vt.id}>
-              {vt.nameEn}
-            </option>
-          ))}
-        </select>
       </div>
 
       <div className="overflow-x-auto">
@@ -79,6 +64,9 @@ export default function ManageMakes() {
                 Name (AR)
               </th>
               <th className="px-4 py-2 text-left text-sm font-semibold text-slate-700">
+                Code
+              </th>
+              <th className="px-4 py-2 text-left text-sm font-semibold text-slate-700">
                 Status
               </th>
               <th className="px-4 py-2 text-right text-sm font-semibold text-slate-700">
@@ -87,14 +75,15 @@ export default function ManageMakes() {
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-200">
-            {filtered.map((m) => (
-              <tr key={m.id} className="hover:bg-slate-50 dark:hover:bg-slate-700/40">
-                <td className="px-4 py-2">{m.nameEn}</td>
+            {filtered.map((t) => (
+              <tr key={t.id} className="hover:bg-slate-50 dark:hover:bg-slate-700/40">
+                <td className="px-4 py-2">{t.nameEn}</td>
                 <td className="px-4 py-2" dir="rtl">
-                  {m.nameAr}
+                  {t.nameAr}
                 </td>
+                <td className="px-4 py-2">{t.code}</td>
                 <td className="px-4 py-2">
-                  {m.active ? (
+                  {t.active ? (
                     <span className="rounded bg-green-100 px-2 py-1 text-xs font-medium text-green-800">
                       Active
                     </span>
@@ -106,7 +95,7 @@ export default function ManageMakes() {
                 </td>
                 <td className="px-4 py-2 text-right">
                   <Link
-                    to={`/admin/masters/makes/edit/${m.id}`}
+                    to={`/admin/masters/vehicle-types/edit/${t.id}`}
                     className="rounded-md p-2 text-indigo-600 hover:bg-slate-100"
                   >
                     Edit
