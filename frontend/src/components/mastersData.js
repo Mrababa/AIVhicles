@@ -17,6 +17,23 @@ export const sampleVehicleTypes = [
   },
 ];
 
+export const sampleBodyTypes = [
+  {
+    id: 1,
+    nameEn: 'SUV',
+    nameAr: 'دفع رباعي',
+    vehicleTypes: [1],
+    active: true,
+  },
+  {
+    id: 2,
+    nameEn: 'Sedan',
+    nameAr: 'سيدان',
+    vehicleTypes: [1],
+    active: true,
+  },
+];
+
 export const sampleMakes = [
   {
     id: 1,
@@ -37,3 +54,26 @@ export const sampleMakes = [
     frequent: false,
   },
 ];
+
+export const sampleModels = [
+  {
+    id: 1,
+    nameEn: 'Camry',
+    nameAr: 'كامري',
+    makeId: 1,
+    vehicleTypeId: 1,
+    modelYears: [2023, 2024],
+    active: true,
+  },
+  {
+    id: 2,
+    nameEn: 'Civic',
+    nameAr: 'سيفيك',
+    makeId: 2,
+    vehicleTypeId: 1,
+    modelYears: [2022, 2023],
+    active: false,
+  },
+];
+
+export const sampleModelYears = [2024, 2023, 2022];
