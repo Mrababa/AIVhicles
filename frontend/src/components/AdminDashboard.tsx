@@ -52,7 +52,20 @@ interface ClientEntry {
   plan: string;
 }
 
-function formatCurrency(value: number) {
+/**
+ * Formats a numeric value as USD currency.
+ *
+ * The API powering this dashboard occasionally returns `undefined` for
+ * `totalRevenue` while data is loading or when the metric is unavailable.
+ * Previously this function assumed a number and would throw when `undefined`
+ * was passed, crashing the dashboard. By accepting an optional value and
+ * returning a placeholder when the value is not a valid number we guard
+ * against these runtime errors.
+ */
+function formatCurrency(value?: number) {
+  if (typeof value !== 'number' || isNaN(value)) {
+    return '—';
+  }
   return value.toLocaleString('en-US', {
     style: 'currency',
     currency: 'USD',
