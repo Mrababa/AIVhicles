@@ -129,8 +129,86 @@ export const sampleEngineSizes = [
 ];
 
 export const sampleTransmissions = [
-  { id: 1, name: 'Automatic' },
-  { id: 2, name: 'Manual' },
+  {
+    id: 1,
+    nameEn: 'Automatic',
+    nameAr: 'أوتوماتيك',
+    abbreviation: 'AT',
+    vehicleTypes: [1],
+    active: true,
+  },
+  {
+    id: 2,
+    nameEn: 'Manual',
+    nameAr: 'يدوي',
+    abbreviation: 'MT',
+    vehicleTypes: [1, 2],
+    active: true,
+  },
+];
+
+export const sampleRegions = [
+  {
+    id: 1,
+    name: 'GCC',
+    countries: 'UAE, KSA, Bahrain',
+    active: true,
+  },
+  {
+    id: 2,
+    name: 'Europe',
+    countries: 'Germany, France, Italy',
+    active: true,
+  },
+];
+
+export const sampleSeats = [
+  {
+    id: 1,
+    count: 2,
+    label: '2+2 Seating',
+    vehicleTypes: [1],
+    active: true,
+  },
+  {
+    id: 2,
+    count: 5,
+    label: 'Standard',
+    vehicleTypes: [1],
+    active: true,
+  },
+];
+
+export const sampleDoors = [
+  {
+    id: 1,
+    count: 2,
+    vehicleTypes: [2],
+    active: true,
+  },
+  {
+    id: 2,
+    count: 4,
+    vehicleTypes: [1],
+    active: true,
+  },
+];
+
+export const sampleCylinders = [
+  {
+    id: 1,
+    count: 4,
+    engineType: 'Inline',
+    vehicleTypes: [1],
+    active: true,
+  },
+  {
+    id: 2,
+    count: 6,
+    engineType: 'V-engine',
+    vehicleTypes: [1],
+    active: true,
+  },
 ];
 
 export const sampleTrims = [

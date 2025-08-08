@@ -165,7 +165,7 @@ export default function AdminTrimFormPage() {
             <option value="">Select Transmission</option>
             {sampleTransmissions.map((t) => (
               <option key={t.id} value={t.id}>
-                {t.name}
+                {t.nameEn}
               </option>
             ))}
           </select>
