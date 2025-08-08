@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { sampleMakes, sampleVehicleTypes } from './mastersData';
+import { ChevronLeftIcon } from '@heroicons/react/24/outline';
 
 /**
- * Form for creating or editing a vehicle make.
+ * Add/Edit form for vehicle makes following the unified master form
+ * design guidelines.
  */
 export default function MakeForm() {
   const { id } = useParams();
@@ -15,6 +17,7 @@ export default function MakeForm() {
     nameAr: '',
     active: true,
     vehicleTypes: [],
+    frequent: false,
   });
 
   useEffect(() => {
@@ -26,46 +29,74 @@ export default function MakeForm() {
           nameAr: existing.nameAr,
           active: existing.active,
           vehicleTypes: existing.vehicleTypes || [],
+          frequent: existing.frequent || false,
         });
       }
     }
   }, [id, isEdit]);
 
+  const handleToggle = (field) => {
+    setForm((prev) => ({ ...prev, [field]: !prev[field] }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Persistence would occur here; for now just return to list
+    // Persistence would occur here
     navigate('/admin/masters/makes');
   };
 
   return (
-    <div className="max-w-xl">
-      <h1 className="mb-6 text-3xl font-bold text-slate-900 dark:text-slate-100">
+    <form
+      onSubmit={handleSubmit}
+      className="mx-auto max-w-2xl rounded-lg bg-white p-6 shadow-lg dark:bg-slate-800"
+    >
+      <Link
+        to="/admin/masters/makes"
+        className="mb-4 inline-flex items-center text-sm text-slate-600 hover:text-slate-800 dark:text-slate-300 dark:hover:text-white"
+      >
+        <ChevronLeftIcon className="mr-1 h-5 w-5" /> Back
+      </Link>
+      <h1 className="mb-6 text-2xl font-bold">
         {isEdit ? 'Edit Make' : 'Add Make'}
       </h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="space-y-6">
         <div>
-          <label className="mb-1 block text-sm font-medium">Name (EN)</label>
+          <label
+            htmlFor="nameEn"
+            className="block text-sm font-medium text-slate-700 dark:text-slate-300"
+          >
+            Name (EN)
+          </label>
           <input
+            id="nameEn"
             type="text"
             value={form.nameEn}
             onChange={(e) => setForm({ ...form, nameEn: e.target.value })}
             required
-            className="w-full rounded border border-slate-300 px-3 py-2 focus:border-indigo-500"
+            className="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:border-slate-600 dark:bg-slate-700 sm:text-sm"
           />
         </div>
         <div>
-          <label className="mb-1 block text-sm font-medium">Name (AR)</label>
+          <label
+            htmlFor="nameAr"
+            className="block text-sm font-medium text-slate-700 dark:text-slate-300"
+          >
+            Name (AR)
+          </label>
           <input
+            id="nameAr"
             type="text"
             dir="rtl"
             value={form.nameAr}
             onChange={(e) => setForm({ ...form, nameAr: e.target.value })}
             required
-            className="w-full rounded border border-slate-300 px-3 py-2 focus:border-indigo-500"
+            className="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:border-slate-600 dark:bg-slate-700 sm:text-sm"
           />
         </div>
         <div>
-          <label className="mb-1 block text-sm font-medium">Vehicle Types</label>
+          <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
+            Vehicle Types
+          </label>
           <div className="flex flex-wrap gap-4">
             {sampleVehicleTypes.map((vt) => {
               const checked = form.vehicleTypes.includes(vt.id);
@@ -74,15 +105,15 @@ export default function MakeForm() {
                   <input
                     type="checkbox"
                     checked={checked}
-                    onChange={() => {
+                    onChange={() =>
                       setForm((prev) => {
                         const next = checked
-                          ? prev.vehicleTypes.filter((id) => id !== vt.id)
+                          ? prev.vehicleTypes.filter((i) => i !== vt.id)
                           : [...prev.vehicleTypes, vt.id];
                         return { ...prev, vehicleTypes: next };
-                      });
-                    }}
-                    className="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+                      })
+                    }
+                    className="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   />
                   {vt.nameEn}
                 </label>
@@ -90,31 +121,59 @@ export default function MakeForm() {
             })}
           </div>
         </div>
-        <div className="flex items-center gap-2">
-          <label className="text-sm font-medium">Is Active</label>
-          <input
-            type="checkbox"
-            checked={form.active}
-            onChange={(e) => setForm({ ...form, active: e.target.checked })}
-            className="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
-          />
-        </div>
-        <div className="flex gap-2">
+        <div className="flex items-center gap-4">
+          <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
+            Active
+          </label>
           <button
-            type="submit"
-            className="rounded bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700"
+            type="button"
+            onClick={() => handleToggle('active')}
+            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
+              form.active ? 'bg-indigo-600' : 'bg-slate-300'
+            }`}
           >
-            Save
+            <span
+              className={`inline-block h-5 w-5 transform rounded-full bg-white transition ${
+                form.active ? 'translate-x-5' : 'translate-x-1'
+              }`}
+            />
           </button>
+        </div>
+        <div className="flex items-center gap-4">
+          <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
+            Frequently Used
+          </label>
+          <button
+            type="button"
+            onClick={() => handleToggle('frequent')}
+            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
+              form.frequent ? 'bg-indigo-600' : 'bg-slate-300'
+            }`}
+          >
+            <span
+              className={`inline-block h-5 w-5 transform rounded-full bg-white transition ${
+                form.frequent ? 'translate-x-5' : 'translate-x-1'
+              }`}
+            />
+          </button>
+        </div>
+        <div className="flex justify-end gap-3">
           <button
             type="button"
             onClick={() => navigate('/admin/masters/makes')}
-            className="rounded border px-4 py-2"
+            className="rounded-md bg-slate-200 px-5 py-2 text-sm font-medium text-slate-800 hover:bg-slate-300 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:bg-slate-700 dark:text-slate-200 dark:hover:bg-slate-600"
           >
             Cancel
           </button>
+          <button
+            type="submit"
+            className="rounded-md bg-indigo-600 px-5 py-2 text-sm font-medium text-white hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          >
+            Save
+          </button>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 }
+

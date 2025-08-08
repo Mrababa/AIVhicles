@@ -18,6 +18,22 @@ export const sampleVehicleTypes = [
 ];
 
 export const sampleMakes = [
-  { id: 1, nameEn: 'Toyota', nameAr: 'تويوتا', active: true, vehicleTypes: [1] },
-  { id: 2, nameEn: 'Honda', nameAr: 'هوندا', active: true, vehicleTypes: [1, 2] },
+  {
+    id: 1,
+    nameEn: 'Toyota',
+    nameAr: 'تويوتا',
+    active: true,
+    vehicleTypes: [1],
+    logo: 'https://via.placeholder.com/40?text=T',
+    frequent: true,
+  },
+  {
+    id: 2,
+    nameEn: 'Honda',
+    nameAr: 'هوندا',
+    active: true,
+    vehicleTypes: [1, 2],
+    logo: 'https://via.placeholder.com/40?text=H',
+    frequent: false,
+  },
 ];
