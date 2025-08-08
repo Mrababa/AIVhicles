@@ -75,5 +75,87 @@ export const sampleModels = [
     active: false,
   },
 ];
+export const sampleModelYearMasters = [
+  { id: 1, year: 2024, active: true },
+  { id: 2, year: 2023, active: true },
+  { id: 3, year: 2022, active: false },
+];
 
-export const sampleModelYears = [2024, 2023, 2022];
+export const sampleModelYears = sampleModelYearMasters
+  .filter((y) => y.active)
+  .map((y) => y.year);
+
+export const sampleWMIs = [
+  {
+    id: 1,
+    code: 'JTD',
+    makeId: 1,
+    country: 'Japan',
+    vehicleTypes: [1],
+    active: true,
+  },
+  {
+    id: 2,
+    code: '1HG',
+    makeId: 2,
+    country: 'USA',
+    vehicleTypes: [1],
+    active: true,
+  },
+];
+
+export const sampleFuelTypes = [
+  { id: 1, name: 'Petrol' },
+  { id: 2, name: 'Hybrid' },
+];
+
+export const sampleEngineSizes = [
+  {
+    id: 1,
+    label: '2.0L',
+    capacity: 1998,
+    fuelTypeId: 1,
+    vehicleTypes: [1],
+    active: true,
+  },
+  {
+    id: 2,
+    label: '1.5L Hybrid',
+    capacity: 1498,
+    fuelTypeId: 2,
+    vehicleTypes: [1],
+    active: true,
+  },
+];
+
+export const sampleTransmissions = [
+  { id: 1, name: 'Automatic' },
+  { id: 2, name: 'Manual' },
+];
+
+export const sampleTrims = [
+  {
+    id: 1,
+    nameEn: 'LE',
+    nameAr: 'إل إي',
+    modelId: 1,
+    year: 2024,
+    vehicleTypeId: 1,
+    transmissionId: 1,
+    engineSizeId: 1,
+    bodyTypeId: 2,
+    active: true,
+  },
+  {
+    id: 2,
+    nameEn: 'Sport',
+    nameAr: 'سبورت',
+    modelId: 2,
+    year: 2023,
+    vehicleTypeId: 1,
+    transmissionId: 2,
+    engineSizeId: 2,
+    bodyTypeId: 2,
+    active: false,
+  },
+];
