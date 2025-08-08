@@ -114,7 +114,11 @@ export default function AdminDashboard() {
       }
       try {
         const usageData = await getApiUsage();
-        setApiUsage(usageData);
+        // Recharts expects an array of data points, but the API can
+        // occasionally return an object or null while data is loading.
+        // Guard against these cases to avoid `data.map` runtime errors
+        // inside the chart implementation.
+        setApiUsage(Array.isArray(usageData) ? usageData : []);
       } catch (err) {
         console.error('Failed to load API usage', err);
       } finally {
