@@ -99,3 +99,38 @@ export interface CylinderMaster {
   vehicleTypes?: number[];
   active: boolean;
 }
+
+export interface FuelTypeMaster {
+  id: number;
+  nameEn: string;
+  nameAr: string;
+  iconUrl?: string;
+  vehicleTypes?: number[];
+  active: boolean;
+}
+
+export interface CategoryMaster {
+  id: number;
+  name: string;
+  description?: string;
+  vehicleTypeId: number;
+  active: boolean;
+}
+
+export interface DepreciationMaster {
+  id: number;
+  yearRange: string;
+  rate: number;
+  vehicleTypeId: number;
+  categoryId?: number;
+  active: boolean;
+}
+
+export interface DriveTrainMaster {
+  id: number;
+  nameEn: string;
+  nameAr: string;
+  description?: string;
+  vehicleTypes?: number[];
+  active: boolean;
+}

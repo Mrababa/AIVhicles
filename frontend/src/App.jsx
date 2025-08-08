@@ -44,6 +44,14 @@ import AdminDoorsPage from './components/AdminDoorsPage.tsx';
 import AdminDoorFormPage from './components/AdminDoorFormPage.tsx';
 import AdminCylindersPage from './components/AdminCylindersPage.tsx';
 import AdminCylinderFormPage from './components/AdminCylinderFormPage.tsx';
+import AdminFuelTypesPage from './components/AdminFuelTypesPage.tsx';
+import AdminFuelTypeFormPage from './components/AdminFuelTypeFormPage.tsx';
+import AdminCategoriesPage from './components/AdminCategoriesPage.tsx';
+import AdminCategoryFormPage from './components/AdminCategoryFormPage.tsx';
+import AdminDepreciationsPage from './components/AdminDepreciationsPage.tsx';
+import AdminDepreciationFormPage from './components/AdminDepreciationFormPage.tsx';
+import AdminDriveTrainsPage from './components/AdminDriveTrainsPage.tsx';
+import AdminDriveTrainFormPage from './components/AdminDriveTrainFormPage.tsx';
 import AboutUsPage from './components/AboutUsPage.tsx';
 import FAQ from './components/FAQ.tsx';
 import Contact from './components/Contact.tsx';
@@ -126,6 +134,18 @@ export default function App() {
               <Route path="masters/cylinders" element={<AdminCylindersPage />} />
               <Route path="masters/cylinders/add" element={<AdminCylinderFormPage />} />
               <Route path="masters/cylinders/edit/:cylinderId" element={<AdminCylinderFormPage />} />
+              <Route path="masters/categories" element={<AdminCategoriesPage />} />
+              <Route path="masters/categories/add" element={<AdminCategoryFormPage />} />
+              <Route path="masters/categories/edit/:categoryId" element={<AdminCategoryFormPage />} />
+              <Route path="masters/fuel-types" element={<AdminFuelTypesPage />} />
+              <Route path="masters/fuel-types/add" element={<AdminFuelTypeFormPage />} />
+              <Route path="masters/fuel-types/edit/:fuelTypeId" element={<AdminFuelTypeFormPage />} />
+              <Route path="masters/depreciations" element={<AdminDepreciationsPage />} />
+              <Route path="masters/depreciations/add" element={<AdminDepreciationFormPage />} />
+              <Route path="masters/depreciations/edit/:depreciationId" element={<AdminDepreciationFormPage />} />
+              <Route path="masters/drive-trains" element={<AdminDriveTrainsPage />} />
+              <Route path="masters/drive-trains/add" element={<AdminDriveTrainFormPage />} />
+              <Route path="masters/drive-trains/edit/:driveTrainId" element={<AdminDriveTrainFormPage />} />
               <Route path="profile" element={<AdminPlaceholder title="My Profile" />} />
               <Route path="settings" element={<AdminPlaceholder title="System Settings" />} />
             </Route>

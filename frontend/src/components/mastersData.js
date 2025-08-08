@@ -105,8 +105,24 @@ export const sampleWMIs = [
 ];
 
 export const sampleFuelTypes = [
-  { id: 1, name: 'Petrol' },
-  { id: 2, name: 'Hybrid' },
+  {
+    id: 1,
+    nameEn: 'Petrol',
+    nameAr: 'بنزين',
+    name: 'Petrol',
+    iconUrl: 'https://via.placeholder.com/24?text=P',
+    vehicleTypes: [1],
+    active: true,
+  },
+  {
+    id: 2,
+    nameEn: 'Hybrid',
+    nameAr: 'هجين',
+    name: 'Hybrid',
+    iconUrl: 'https://via.placeholder.com/24?text=H',
+    vehicleTypes: [1],
+    active: true,
+  },
 ];
 
 export const sampleEngineSizes = [
@@ -235,5 +251,60 @@ export const sampleTrims = [
     engineSizeId: 2,
     bodyTypeId: 2,
     active: false,
+  },
+];
+
+export const sampleCategories = [
+  {
+    id: 1,
+    name: 'Passenger',
+    description: 'Passenger vehicles',
+    vehicleTypeId: 1,
+    active: true,
+  },
+  {
+    id: 2,
+    name: 'Commercial',
+    description: 'Commercial vehicles',
+    vehicleTypeId: 1,
+    active: true,
+  },
+];
+
+export const sampleDepreciations = [
+  {
+    id: 1,
+    yearRange: '0-5',
+    rate: 15,
+    vehicleTypeId: 1,
+    categoryId: 1,
+    active: true,
+  },
+  {
+    id: 2,
+    yearRange: '6-10',
+    rate: 10,
+    vehicleTypeId: 1,
+    categoryId: 1,
+    active: true,
+  },
+];
+
+export const sampleDriveTrains = [
+  {
+    id: 1,
+    nameEn: 'Front-Wheel Drive',
+    nameAr: 'دفع أمامي',
+    description: 'Power to front wheels',
+    vehicleTypes: [1],
+    active: true,
+  },
+  {
+    id: 2,
+    nameEn: 'All-Wheel Drive',
+    nameAr: 'دفع رباعي',
+    description: 'Power to all wheels',
+    vehicleTypes: [1],
+    active: true,
   },
 ];
