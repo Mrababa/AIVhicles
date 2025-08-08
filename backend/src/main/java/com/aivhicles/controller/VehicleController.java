@@ -22,6 +22,7 @@ public class VehicleController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     public List<Vehicle> list() {
         return vehicleService.findAll();
     }

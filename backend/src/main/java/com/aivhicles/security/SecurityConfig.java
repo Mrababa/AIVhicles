@@ -49,7 +49,11 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**", "/api/plans/public", "/api/specs/**").permitAll()
+                        .requestMatchers("/auth/**", "/api/plans/public").permitAll()
+                        .requestMatchers("/api/specs/**").hasAnyRole("CATALOG_MANAGER", "ADMIN")
+                        .requestMatchers("/api/vehicles/catalog/**").hasAnyRole("CATALOG_MANAGER", "USER", "ADMIN")
+                        .requestMatchers("/api/vehicles/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/api/damage-estimator/**").hasAnyRole("ADMIN", "USER")
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
