@@ -126,13 +126,17 @@ export default function AdminDashboard() {
       }
       try {
         const activityData = await getRecentActivity();
-        setActivities(activityData);
+        // The activity feed endpoint occasionally responds with a non-array
+        // value (e.g. `null` or an object) while data is loading. Guard
+        // against this to prevent `activities.map` from throwing.
+        setActivities(Array.isArray(activityData) ? activityData : []);
       } catch (err) {
         console.error('Failed to load recent activity', err);
       }
       try {
         const clientData = await getNewClients();
-        setClients(clientData);
+        // Similarly ensure the clients list is always an array before use.
+        setClients(Array.isArray(clientData) ? clientData : []);
       } catch (err) {
         console.error('Failed to load new clients', err);
       }
