@@ -23,10 +23,10 @@ import {
 } from '../services/analyticsService.ts';
 
 interface Kpis {
-  totalRevenue: number;
-  newClients: number;
-  apiCalls: number;
-  activeUsers: number;
+  totalRevenue?: number;
+  newClients?: number;
+  apiCalls?: number;
+  activeUsers?: number;
 }
 
 interface ApiUsageEntry {
@@ -143,22 +143,22 @@ export default function AdminDashboard() {
   const kpiCards = [
     {
       title: 'Total Revenue',
-      value: kpis ? formatCurrency(kpis.totalRevenue) : '—',
+      value: formatCurrency(kpis?.totalRevenue),
       icon: BanknotesIcon,
     },
     {
       title: 'New Clients (This Month)',
-      value: kpis ? kpis.newClients.toString() : '—',
+      value: kpis?.newClients?.toString() ?? '—',
       icon: UserPlusIcon,
     },
     {
       title: 'API Calls (Last 24h)',
-      value: kpis ? kpis.apiCalls.toString() : '—',
+      value: kpis?.apiCalls?.toString() ?? '—',
       icon: ChartBarIcon,
     },
     {
       title: 'Active Users',
-      value: kpis ? kpis.activeUsers.toString() : '—',
+      value: kpis?.activeUsers?.toString() ?? '—',
       icon: UsersIcon,
     },
   ];
