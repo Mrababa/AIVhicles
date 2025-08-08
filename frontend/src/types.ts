@@ -23,3 +23,40 @@ export interface ModelMaster {
   modelYears?: number[];
   active: boolean;
 }
+
+export interface WmiMaster {
+  id: number;
+  code: string;
+  makeId: number;
+  country: string;
+  vehicleTypes?: number[];
+  active: boolean;
+}
+
+export interface ModelYearMaster {
+  id: number;
+  year: number;
+  active: boolean;
+}
+
+export interface TrimMaster {
+  id: number;
+  nameEn: string;
+  nameAr: string;
+  modelId: number;
+  year: number;
+  vehicleTypeId: number;
+  transmissionId?: number;
+  engineSizeId?: number;
+  bodyTypeId?: number;
+  active: boolean;
+}
+
+export interface EngineSizeMaster {
+  id: number;
+  label: string;
+  capacity?: number;
+  fuelTypeId?: number;
+  vehicleTypes?: number[];
+  active: boolean;
+}

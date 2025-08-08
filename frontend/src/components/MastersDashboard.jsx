@@ -34,7 +34,7 @@ export default function MastersDashboard() {
       key: 'trims',
       name: 'Trims',
       description: 'Model variants and levels',
-      enabled: false,
+      enabled: true,
     },
     {
       key: 'body-types',
@@ -46,13 +46,13 @@ export default function MastersDashboard() {
       key: 'model-years',
       name: 'Model Years',
       description: 'Manage active model years',
-      enabled: false,
+      enabled: true,
     },
     {
       key: 'engine-sizes',
       name: 'Engine Sizes',
       description: 'Engine displacement info',
-      enabled: false,
+      enabled: true,
     },
     {
       key: 'transmissions',
@@ -94,7 +94,7 @@ export default function MastersDashboard() {
       key: 'wmi',
       name: 'WMI',
       description: 'World Manufacturer Identifiers',
-      enabled: false,
+      enabled: true,
     },
     {
       key: 'mileage-labels',

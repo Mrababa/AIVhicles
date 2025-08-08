@@ -26,6 +26,14 @@ import AdminBodyTypesPage from './components/AdminBodyTypesPage.tsx';
 import AdminBodyTypeFormPage from './components/AdminBodyTypeFormPage.tsx';
 import AdminModelsPage from './components/AdminModelsPage.tsx';
 import AdminModelFormPage from './components/AdminModelFormPage.tsx';
+import AdminWmiPage from './components/AdminWmiPage.tsx';
+import AdminWmiFormPage from './components/AdminWmiFormPage.tsx';
+import AdminModelYearsPage from './components/AdminModelYearsPage.tsx';
+import AdminModelYearFormPage from './components/AdminModelYearFormPage.tsx';
+import AdminTrimsPage from './components/AdminTrimsPage.tsx';
+import AdminTrimFormPage from './components/AdminTrimFormPage.tsx';
+import AdminEngineSizesPage from './components/AdminEngineSizesPage.tsx';
+import AdminEngineSizeFormPage from './components/AdminEngineSizeFormPage.tsx';
 import AboutUsPage from './components/AboutUsPage.tsx';
 import FAQ from './components/FAQ.tsx';
 import Contact from './components/Contact.tsx';
@@ -81,6 +89,18 @@ export default function App() {
               <Route path="masters/makes" element={<ManageMakes />} />
               <Route path="masters/makes/add" element={<MakeForm />} />
               <Route path="masters/makes/edit/:id" element={<MakeForm />} />
+              <Route path="masters/wmi" element={<AdminWmiPage />} />
+              <Route path="masters/wmi/add" element={<AdminWmiFormPage />} />
+              <Route path="masters/wmi/edit/:wmiId" element={<AdminWmiFormPage />} />
+              <Route path="masters/model-years" element={<AdminModelYearsPage />} />
+              <Route path="masters/model-years/add" element={<AdminModelYearFormPage />} />
+              <Route path="masters/model-years/edit/:yearId" element={<AdminModelYearFormPage />} />
+              <Route path="masters/trims" element={<AdminTrimsPage />} />
+              <Route path="masters/trims/add" element={<AdminTrimFormPage />} />
+              <Route path="masters/trims/edit/:trimId" element={<AdminTrimFormPage />} />
+              <Route path="masters/engine-sizes" element={<AdminEngineSizesPage />} />
+              <Route path="masters/engine-sizes/add" element={<AdminEngineSizeFormPage />} />
+              <Route path="masters/engine-sizes/edit/:engineId" element={<AdminEngineSizeFormPage />} />
               <Route path="profile" element={<AdminPlaceholder title="My Profile" />} />
               <Route path="settings" element={<AdminPlaceholder title="System Settings" />} />
             </Route>
