@@ -1,10 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { sampleMakes, sampleVehicleTypes } from './mastersData';
-import {
-  RectangleStackIcon,
-  BuildingOffice2Icon,
-} from '@heroicons/react/24/outline';
+import axios from 'axios';
+import { Layers as LayersIcon } from 'lucide-react';
 
 /**
  * Dashboard listing all master data entities.
@@ -12,74 +9,176 @@ import {
  */
 export default function MastersDashboard() {
   const navigate = useNavigate();
+  const [counts, setCounts] = useState({});
 
   const entities = [
-    {
-      key: 'vehicle-types',
-      name: 'Vehicle Types',
-      description: 'Vehicle categories',
-      count: sampleVehicleTypes.length,
-      enabled: true,
-      icon: RectangleStackIcon,
-    },
     {
       key: 'makes',
       name: 'Makes',
       description: 'Vehicle manufacturers',
-      count: sampleMakes.length,
       enabled: true,
-      icon: BuildingOffice2Icon,
     },
     {
       key: 'models',
       name: 'Models',
-      description: 'Vehicle models',
-      count: 0,
+      description: 'Specific vehicle models',
       enabled: false,
-      icon: RectangleStackIcon,
+    },
+    {
+      key: 'vehicle-types',
+      name: 'Vehicle Types',
+      description: 'e.g., Light, Motorcycle, EV',
+      enabled: false,
+    },
+    {
+      key: 'trims',
+      name: 'Trims',
+      description: 'Model variants and levels',
+      enabled: false,
     },
     {
       key: 'body-types',
       name: 'Body Types',
-      description: 'Vehicle body styles',
-      count: 0,
+      description: 'e.g., SUV, Sedan, Coupe',
       enabled: false,
-      icon: RectangleStackIcon,
+    },
+    {
+      key: 'model-years',
+      name: 'Model Years',
+      description: 'Manage active model years',
+      enabled: false,
+    },
+    {
+      key: 'engine-sizes',
+      name: 'Engine Sizes',
+      description: 'Engine displacement info',
+      enabled: false,
+    },
+    {
+      key: 'transmissions',
+      name: 'Transmissions',
+      description: 'Transmission types',
+      enabled: false,
+    },
+    {
+      key: 'regions',
+      name: 'Regions',
+      description: 'Geographical markets',
+      enabled: false,
+    },
+    {
+      key: 'doors',
+      name: 'Doors',
+      description: 'Number of doors',
+      enabled: false,
+    },
+    {
+      key: 'seats',
+      name: 'Seats',
+      description: 'Number of seats',
+      enabled: false,
+    },
+    {
+      key: 'cylinders',
+      name: 'Cylinders',
+      description: 'Engine cylinder counts',
+      enabled: false,
+    },
+    {
+      key: 'axles',
+      name: 'Axles',
+      description: 'Vehicle axle counts',
+      enabled: false,
+    },
+    {
+      key: 'wmi',
+      name: 'WMI',
+      description: 'World Manufacturer Identifiers',
+      enabled: false,
+    },
+    {
+      key: 'mileage-labels',
+      name: 'Mileage Labels',
+      description: 'e.g., MPG, KM/L',
+      enabled: false,
+    },
+    {
+      key: 'categories',
+      name: 'Categories',
+      description: 'e.g., Passenger, Commercial',
+      enabled: false,
+    },
+    {
+      key: 'fuel-types',
+      name: 'Fuel Types',
+      description: 'e.g., Petrol, Diesel, EV',
+      enabled: false,
+    },
+    {
+      key: 'depreciations',
+      name: 'Depreciations',
+      description: 'Depreciation rate rules',
+      enabled: false,
+    },
+    {
+      key: 'drive-trains',
+      name: 'Drive Trains',
+      description: 'e.g., FWD, AWD',
+      enabled: false,
     },
   ];
 
+  useEffect(() => {
+    entities.forEach((entity) => {
+      axios
+        .get(`/api/${entity.key}`)
+        .then((res) => {
+          const value = Array.isArray(res.data)
+            ? res.data.length
+            : res.data?.length ?? res.data?.count ?? res.data?.total ?? 0;
+          setCounts((prev) => ({ ...prev, [entity.key]: value }));
+        })
+        .catch(() => {
+          setCounts((prev) => ({ ...prev, [entity.key]: 0 }));
+        });
+    });
+  }, []);
+
   return (
     <div>
-      <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-6">
+      <h1 className="mb-6 text-3xl font-bold text-slate-900 dark:text-slate-100">
         Masters
       </h1>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {entities.map((entity) => {
-          const Icon = entity.icon;
-          return (
-            <div
-              key={entity.key}
-              onClick={() =>
-                entity.enabled && navigate(`/admin/masters/${entity.key}`)
-              }
-              className={`rounded-lg bg-white p-4 shadow-md transition transform dark:bg-slate-800 ${
-                entity.enabled
-                  ? 'cursor-pointer hover:-translate-y-1 hover:shadow-xl'
-                  : 'cursor-not-allowed opacity-60'
-              }`}
-            >
-              <div className="flex items-start justify-between">
-                <div>
-                  <div className="text-lg font-semibold">{entity.name}</div>
-                  <div className="mt-1 text-sm">{entity.description}</div>
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {entities.map((entity) => (
+          <div
+            key={entity.key}
+            onClick={() => entity.enabled && navigate(`/admin/masters/${entity.key}`)}
+            className={`rounded-lg bg-white p-6 shadow-md transition-all duration-300 dark:bg-slate-800 ${
+              entity.enabled
+                ? 'cursor-pointer hover:-translate-y-1 hover:shadow-xl'
+                : 'cursor-not-allowed opacity-60'
+            }`}
+          >
+            <div className="flex items-start justify-between">
+              <div>
+                <div className="text-lg font-bold text-slate-900 dark:text-white">
+                  {entity.name}
                 </div>
-                {Icon && <Icon className="h-8 w-8 text-slate-400" />}
+                <div className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                  {entity.description}
+                </div>
               </div>
-              <div className="mt-4 text-2xl font-bold">{entity.count}</div>
+              <LayersIcon className="h-5 w-5 text-indigo-400" />
             </div>
-          );
-        })}
+            <div className="mt-4 text-2xl font-bold text-slate-800 dark:text-white">
+              {counts[entity.key] ?? 0}
+            </div>
+            <div className="text-xs text-slate-400">records</div>
+          </div>
+        ))}
       </div>
     </div>
   );
 }
+
