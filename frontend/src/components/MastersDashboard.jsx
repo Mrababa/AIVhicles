@@ -106,25 +106,25 @@ export default function MastersDashboard() {
       key: 'categories',
       name: 'Categories',
       description: 'e.g., Passenger, Commercial',
-      enabled: false,
+      enabled: true,
     },
     {
       key: 'fuel-types',
       name: 'Fuel Types',
       description: 'e.g., Petrol, Diesel, EV',
-      enabled: false,
+      enabled: true,
     },
     {
       key: 'depreciations',
       name: 'Depreciations',
       description: 'Depreciation rate rules',
-      enabled: false,
+      enabled: true,
     },
     {
       key: 'drive-trains',
       name: 'Drive Trains',
       description: 'e.g., FWD, AWD',
-      enabled: false,
+      enabled: true,
     },
   ];
 
