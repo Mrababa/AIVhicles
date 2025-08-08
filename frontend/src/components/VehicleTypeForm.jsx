@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { sampleMakes, sampleVehicleTypes } from './mastersData';
+import { sampleVehicleTypes } from './mastersData';
 
 /**
- * Form for creating or editing a vehicle make.
+ * Form for creating or editing a vehicle type.
  */
-export default function MakeForm() {
+export default function VehicleTypeForm() {
   const { id } = useParams();
   const navigate = useNavigate();
   const isEdit = Boolean(id);
@@ -13,19 +13,19 @@ export default function MakeForm() {
   const [form, setForm] = useState({
     nameEn: '',
     nameAr: '',
+    code: '',
     active: true,
-    vehicleTypes: [],
   });
 
   useEffect(() => {
     if (isEdit) {
-      const existing = sampleMakes.find((m) => m.id === Number(id));
+      const existing = sampleVehicleTypes.find((t) => t.id === Number(id));
       if (existing) {
         setForm({
           nameEn: existing.nameEn,
           nameAr: existing.nameAr,
+          code: existing.code,
           active: existing.active,
-          vehicleTypes: existing.vehicleTypes || [],
         });
       }
     }
@@ -33,14 +33,13 @@ export default function MakeForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Persistence would occur here; for now just return to list
-    navigate('/admin/masters/makes');
+    navigate('/admin/masters/vehicle-types');
   };
 
   return (
     <div className="max-w-xl">
       <h1 className="mb-6 text-3xl font-bold text-slate-900 dark:text-slate-100">
-        {isEdit ? 'Edit Make' : 'Add Make'}
+        {isEdit ? 'Edit Vehicle Type' : 'Add Vehicle Type'}
       </h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -65,30 +64,14 @@ export default function MakeForm() {
           />
         </div>
         <div>
-          <label className="mb-1 block text-sm font-medium">Vehicle Types</label>
-          <div className="flex flex-wrap gap-4">
-            {sampleVehicleTypes.map((vt) => {
-              const checked = form.vehicleTypes.includes(vt.id);
-              return (
-                <label key={vt.id} className="flex items-center gap-2 text-sm">
-                  <input
-                    type="checkbox"
-                    checked={checked}
-                    onChange={() => {
-                      setForm((prev) => {
-                        const next = checked
-                          ? prev.vehicleTypes.filter((id) => id !== vt.id)
-                          : [...prev.vehicleTypes, vt.id];
-                        return { ...prev, vehicleTypes: next };
-                      });
-                    }}
-                    className="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
-                  />
-                  {vt.nameEn}
-                </label>
-              );
-            })}
-          </div>
+          <label className="mb-1 block text-sm font-medium">Code</label>
+          <input
+            type="text"
+            value={form.code}
+            onChange={(e) => setForm({ ...form, code: e.target.value })}
+            required
+            className="w-full rounded border border-slate-300 px-3 py-2 focus:border-indigo-500"
+          />
         </div>
         <div className="flex items-center gap-2">
           <label className="text-sm font-medium">Is Active</label>
@@ -108,7 +91,7 @@ export default function MakeForm() {
           </button>
           <button
             type="button"
-            onClick={() => navigate('/admin/masters/makes')}
+            onClick={() => navigate('/admin/masters/vehicle-types')}
             className="rounded border px-4 py-2"
           >
             Cancel
