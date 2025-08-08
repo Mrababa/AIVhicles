@@ -6,6 +6,8 @@ import {
   TrashIcon,
   ChevronRightIcon,
 } from '@heroicons/react/24/outline';
+import StatusBadge from './StatusBadge';
+import UsageBar from './UsageBar';
 
 /**
  * Admin interface for managing client organizations. Currently relies on
@@ -45,12 +47,6 @@ const initialClients: Client[] = [
     apiUsage: { current: 12000, limit: 20000 },
   },
 ];
-
-const statusStyles: Record<Client['status'], string> = {
-  Active: 'bg-green-100 text-green-800',
-  Trial: 'bg-sky-100 text-sky-800',
-  Suspended: 'bg-amber-100 text-amber-800',
-};
 
 export default function AdminClients() {
   const [clients, setClients] = useState<Client[]>([]);
@@ -102,17 +98,17 @@ export default function AdminClients() {
   }
 
   return (
-    <div>
+    <div className="px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-4 flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-100">Client Management</h1>
+        <h1 className="text-3xl font-bold text-slate-800 dark:text-white">Client Management</h1>
         <button
           onClick={() => {
             setEditing(null);
             setShowForm(true);
           }}
-          className="flex items-center rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white hover:bg-indigo-700"
+          className="flex items-center rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white transition hover:bg-indigo-700"
         >
-          <BriefcaseIcon className="mr-2 h-5 w-5" /> + Add Client
+          <BriefcaseIcon className="mr-2 h-5 w-5" /> Add Client
         </button>
       </div>
 
@@ -120,45 +116,47 @@ export default function AdminClients() {
       <div className="mb-4" />
 
       {loading ? (
-        <table className="min-w-full divide-y divide-slate-200">
-          <thead>
-            <tr className="bg-slate-50">
-              {['Client', 'Status', 'Plan', 'Users', 'API Usage', 'Actions'].map((h) => (
-                <th
-                  key={h}
-                  scope="col"
-                  className="px-4 py-2 text-left text-sm font-semibold text-slate-700"
-                >
-                  {h}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-200">
-            {Array.from({ length: 3 }).map((_, i) => (
-              <tr key={i} className="animate-pulse">
-                <td className="px-4 py-4">
-                  <div className="h-6 w-40 rounded bg-slate-200" />
-                </td>
-                <td className="px-4 py-4">
-                  <div className="h-6 w-16 rounded bg-slate-200" />
-                </td>
-                <td className="px-4 py-4">
-                  <div className="h-6 w-20 rounded bg-slate-200" />
-                </td>
-                <td className="px-4 py-4">
-                  <div className="h-6 w-12 rounded bg-slate-200" />
-                </td>
-                <td className="px-4 py-4">
-                  <div className="h-6 w-32 rounded bg-slate-200" />
-                </td>
-                <td className="px-4 py-4">
-                  <div className="h-6 w-24 rounded bg-slate-200" />
-                </td>
+        <div className="overflow-x-auto rounded-lg bg-white shadow-lg dark:bg-slate-800">
+          <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
+            <thead>
+              <tr className="bg-slate-50 dark:bg-slate-700/50">
+                {['Client', 'Status', 'Plan', 'Users', 'API Usage', 'Actions'].map((h) => (
+                  <th
+                    key={h}
+                    scope="col"
+                    className="px-4 py-2 text-left text-sm font-semibold text-slate-500 dark:text-slate-400"
+                  >
+                    {h}
+                  </th>
+                ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
+              {Array.from({ length: 3 }).map((_, i) => (
+                <tr key={i} className="animate-pulse">
+                  <td className="px-4 py-4">
+                    <div className="h-6 w-40 rounded bg-slate-200 dark:bg-slate-700" />
+                  </td>
+                  <td className="px-4 py-4">
+                    <div className="h-6 w-16 rounded bg-slate-200 dark:bg-slate-700" />
+                  </td>
+                  <td className="px-4 py-4">
+                    <div className="h-6 w-20 rounded bg-slate-200 dark:bg-slate-700" />
+                  </td>
+                  <td className="px-4 py-4">
+                    <div className="h-6 w-12 rounded bg-slate-200 dark:bg-slate-700" />
+                  </td>
+                  <td className="px-4 py-4">
+                    <div className="h-6 w-32 rounded bg-slate-200 dark:bg-slate-700" />
+                  </td>
+                  <td className="px-4 py-4">
+                    <div className="h-6 w-24 rounded bg-slate-200 dark:bg-slate-700" />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       ) : clients.length === 0 ? (
         <div className="text-center">
           <p className="mb-4 text-slate-600 dark:text-slate-300">No clients found.</p>
@@ -167,105 +165,81 @@ export default function AdminClients() {
               setEditing(null);
               setShowForm(true);
             }}
-            className="inline-flex items-center rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white hover:bg-indigo-700"
+            className="inline-flex items-center rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white transition hover:bg-indigo-700"
           >
-            <BriefcaseIcon className="mr-2 h-5 w-5" /> Add your first client
+            <BriefcaseIcon className="mr-2 h-5 w-5" /> Add Client
           </button>
         </div>
       ) : (
-        <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-slate-200">
+        <div className="overflow-x-auto rounded-lg bg-white shadow-lg dark:bg-slate-800">
+          <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
             <thead>
-              <tr className="bg-slate-50">
-                <th scope="col" className="px-4 py-2 text-left text-sm font-semibold text-slate-700">
+              <tr className="bg-slate-50 dark:bg-slate-700/50">
+                <th scope="col" className="px-4 py-2 text-left text-sm font-semibold text-slate-500 dark:text-slate-400">
                   Client
                 </th>
-                <th scope="col" className="px-4 py-2 text-left text-sm font-semibold text-slate-700">
+                <th scope="col" className="px-4 py-2 text-left text-sm font-semibold text-slate-500 dark:text-slate-400">
                   Status
                 </th>
-                <th scope="col" className="px-4 py-2 text-left text-sm font-semibold text-slate-700">
+                <th scope="col" className="px-4 py-2 text-left text-sm font-semibold text-slate-500 dark:text-slate-400">
                   Plan
                 </th>
-                <th scope="col" className="px-4 py-2 text-left text-sm font-semibold text-slate-700">
+                <th scope="col" className="px-4 py-2 text-left text-sm font-semibold text-slate-500 dark:text-slate-400">
                   Users
                 </th>
-                <th scope="col" className="px-4 py-2 text-left text-sm font-semibold text-slate-700">
+                <th scope="col" className="px-4 py-2 text-left text-sm font-semibold text-slate-500 dark:text-slate-400">
                   API Usage (This Month)
                 </th>
-                <th scope="col" className="px-4 py-2 text-right text-sm font-semibold text-slate-700">
+                <th scope="col" className="px-4 py-2 text-right text-sm font-semibold text-slate-500 dark:text-slate-400">
                   Actions
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-200 bg-white">
-              {clients.map((client) => {
-                const percent = Math.min(
-                  100,
-                  Math.round((client.apiUsage.current / client.apiUsage.limit) * 100)
-                );
-                return (
-                  <tr key={client.id} className="hover:bg-slate-50">
-                    <td className="px-4 py-4">
-                      <ClientInfo name={client.name} logo={client.logo} />
-                    </td>
-                    <td className="px-4 py-4">
-                      <span
-                        className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${statusStyles[client.status]}`}
+            <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
+              {clients.map((client) => (
+                <tr key={client.id} className="hover:bg-slate-50 dark:hover:bg-slate-700/40">
+                  <td className="px-4 py-4">
+                    <ClientInfo name={client.name} logo={client.logo} />
+                  </td>
+                  <td className="px-4 py-4">
+                    <StatusBadge status={client.status} />
+                  </td>
+                  <td className="px-4 py-4 text-sm text-slate-700 dark:text-slate-300">{client.plan}</td>
+                  <td className="px-4 py-4 text-sm text-slate-700 dark:text-slate-300">{client.users}</td>
+                  <td className="px-4 py-4">
+                    <UsageBar current={client.apiUsage.current} limit={client.apiUsage.limit} />
+                  </td>
+                  <td className="px-4 py-4 text-right">
+                    <div className="inline-flex items-center space-x-2">
+                      <button
+                        onClick={() => navigate(`/admin/clients/${client.id}`)}
+                        className="flex items-center rounded-lg bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-indigo-700"
                       >
-                        {client.status}
-                      </span>
-                    </td>
-                    <td className="px-4 py-4 text-sm text-slate-700">{client.plan}</td>
-                    <td className="px-4 py-4 text-sm text-slate-700">{client.users}</td>
-                    <td className="px-4 py-4">
-                      <div className="flex items-center">
-                        <div
-                          className="mr-2 h-2 w-32 rounded bg-slate-200"
-                          role="progressbar"
-                          aria-valuenow={client.apiUsage.current}
-                          aria-valuemin={0}
-                          aria-valuemax={client.apiUsage.limit}
-                        >
-                          <div
-                            className="h-2 rounded bg-indigo-600"
-                            style={{ width: `${percent}%` }}
-                          />
-                        </div>
-                        <span className="text-sm text-slate-700">
-                          {client.apiUsage.current.toLocaleString()} / {client.apiUsage.limit.toLocaleString()}
-                        </span>
-                      </div>
-                    </td>
-                    <td className="px-4 py-4 text-right">
-                      <div className="inline-flex items-center space-x-2">
-                        <button
-                          onClick={() => navigate(`/admin/clients/${client.id}`)}
-                          className="flex items-center rounded-lg bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700"
-                        >
-                          Manage <ChevronRightIcon className="ml-1 h-4 w-4" />
-                        </button>
-                        <button
-                          aria-label={`Edit ${client.name}`}
-                          onClick={() => {
-                            setEditing(client);
-                            setShowForm(true);
-                          }}
-                          className="rounded p-1 hover:bg-slate-200"
-                        >
-                          <PencilIcon className="h-5 w-5 text-slate-600" />
-                        </button>
-                        <button
-                          aria-label={`Delete ${client.name}`}
-                          onClick={() => setDeleting(client)}
-                          className="rounded p-1 hover:bg-red-100"
-                        >
-                          <TrashIcon className="h-5 w-5 text-red-600" />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
+                        Manage <ChevronRightIcon className="ml-1 h-4 w-4" />
+                      </button>
+                      <button
+                        aria-label={`Edit ${client.name}`}
+                        title="Edit"
+                        onClick={() => {
+                          setEditing(client);
+                          setShowForm(true);
+                        }}
+                        className="rounded p-1 hover:bg-slate-100 dark:hover:bg-slate-700"
+                      >
+                        <PencilIcon className="h-5 w-5 text-slate-600" />
+                      </button>
+                      <button
+                        aria-label={`Delete ${client.name}`}
+                        title="Delete"
+                        onClick={() => setDeleting(client)}
+                        className="rounded p-1 text-slate-600 hover:bg-slate-100 hover:text-red-600 dark:hover:bg-slate-700"
+                      >
+                        <TrashIcon className="h-5 w-5" />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
@@ -298,7 +272,7 @@ function ClientInfo({ name, logo }: { name: string; logo?: string }) {
   const [error, setError] = useState(false);
   return (
     <div className="flex items-center">
-      <div className="mr-3 flex h-10 w-10 items-center justify-center rounded-md bg-white shadow">
+      <div className="mr-3 flex h-10 w-10 items-center justify-center rounded-md bg-white p-1 shadow-sm">
         {error || !logo ? (
           <span className="text-sm font-semibold text-slate-700">
             {name.charAt(0).toUpperCase()}
@@ -307,7 +281,7 @@ function ClientInfo({ name, logo }: { name: string; logo?: string }) {
           <img
             src={logo}
             alt={`${name} logo`}
-            className="h-10 w-10 object-contain"
+            className="h-full w-full object-contain"
             onError={() => setError(true)}
           />
         )}
