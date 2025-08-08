@@ -60,3 +60,42 @@ export interface EngineSizeMaster {
   vehicleTypes?: number[];
   active: boolean;
 }
+
+export interface TransmissionMaster {
+  id: number;
+  nameEn: string;
+  nameAr: string;
+  abbreviation?: string;
+  vehicleTypes?: number[];
+  active: boolean;
+}
+
+export interface RegionMaster {
+  id: number;
+  name: string;
+  countries?: string;
+  active: boolean;
+}
+
+export interface SeatMaster {
+  id: number;
+  count: number;
+  label?: string;
+  vehicleTypes?: number[];
+  active: boolean;
+}
+
+export interface DoorMaster {
+  id: number;
+  count: number;
+  vehicleTypes?: number[];
+  active: boolean;
+}
+
+export interface CylinderMaster {
+  id: number;
+  count: number;
+  engineType?: string;
+  vehicleTypes?: number[];
+  active: boolean;
+}

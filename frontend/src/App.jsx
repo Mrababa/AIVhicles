@@ -34,6 +34,16 @@ import AdminTrimsPage from './components/AdminTrimsPage.tsx';
 import AdminTrimFormPage from './components/AdminTrimFormPage.tsx';
 import AdminEngineSizesPage from './components/AdminEngineSizesPage.tsx';
 import AdminEngineSizeFormPage from './components/AdminEngineSizeFormPage.tsx';
+import AdminTransmissionsPage from './components/AdminTransmissionsPage.tsx';
+import AdminTransmissionFormPage from './components/AdminTransmissionFormPage.tsx';
+import AdminRegionsPage from './components/AdminRegionsPage.tsx';
+import AdminRegionFormPage from './components/AdminRegionFormPage.tsx';
+import AdminSeatsPage from './components/AdminSeatsPage.tsx';
+import AdminSeatFormPage from './components/AdminSeatFormPage.tsx';
+import AdminDoorsPage from './components/AdminDoorsPage.tsx';
+import AdminDoorFormPage from './components/AdminDoorFormPage.tsx';
+import AdminCylindersPage from './components/AdminCylindersPage.tsx';
+import AdminCylinderFormPage from './components/AdminCylinderFormPage.tsx';
 import AboutUsPage from './components/AboutUsPage.tsx';
 import FAQ from './components/FAQ.tsx';
 import Contact from './components/Contact.tsx';
@@ -101,6 +111,21 @@ export default function App() {
               <Route path="masters/engine-sizes" element={<AdminEngineSizesPage />} />
               <Route path="masters/engine-sizes/add" element={<AdminEngineSizeFormPage />} />
               <Route path="masters/engine-sizes/edit/:engineId" element={<AdminEngineSizeFormPage />} />
+              <Route path="masters/transmissions" element={<AdminTransmissionsPage />} />
+              <Route path="masters/transmissions/add" element={<AdminTransmissionFormPage />} />
+              <Route path="masters/transmissions/edit/:transmissionId" element={<AdminTransmissionFormPage />} />
+              <Route path="masters/regions" element={<AdminRegionsPage />} />
+              <Route path="masters/regions/add" element={<AdminRegionFormPage />} />
+              <Route path="masters/regions/edit/:regionId" element={<AdminRegionFormPage />} />
+              <Route path="masters/seats" element={<AdminSeatsPage />} />
+              <Route path="masters/seats/add" element={<AdminSeatFormPage />} />
+              <Route path="masters/seats/edit/:seatId" element={<AdminSeatFormPage />} />
+              <Route path="masters/doors" element={<AdminDoorsPage />} />
+              <Route path="masters/doors/add" element={<AdminDoorFormPage />} />
+              <Route path="masters/doors/edit/:doorId" element={<AdminDoorFormPage />} />
+              <Route path="masters/cylinders" element={<AdminCylindersPage />} />
+              <Route path="masters/cylinders/add" element={<AdminCylinderFormPage />} />
+              <Route path="masters/cylinders/edit/:cylinderId" element={<AdminCylinderFormPage />} />
               <Route path="profile" element={<AdminPlaceholder title="My Profile" />} />
               <Route path="settings" element={<AdminPlaceholder title="System Settings" />} />
             </Route>
