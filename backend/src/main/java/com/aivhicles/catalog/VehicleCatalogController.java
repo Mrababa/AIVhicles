@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/vehicles/catalog")
 public class VehicleCatalogController {
-    private final VehicleService service;
+    private final CatalogVehicleService service;
 
-    public VehicleCatalogController(VehicleService service) {
+    public VehicleCatalogController(CatalogVehicleService service) {
         this.service = service;
     }
 

@@ -8,20 +8,27 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+/**
+ * In-memory catalog vehicle service used for demo catalog endpoints.
+ */
 @Service
-public class VehicleService {
+public class CatalogVehicleService {
     private final List<Vehicle> vehicles = new ArrayList<>();
 
-    public VehicleService() {
-        vehicles.add(new Vehicle("veh-1", "Toyota", "Corolla", 2024, "Hybrid", "Automatic", "Sedan", "FWD", "https://cdn.site.com/images/corolla.jpg", 24000.0));
-        vehicles.add(new Vehicle("veh-2", "Ford", "F-150", 2023, "Petrol", "Automatic", "Pickup", "RWD", "https://cdn.site.com/images/f150.jpg", 32000.0));
-        vehicles.add(new Vehicle("veh-3", "Tesla", "Model 3", 2024, "Electric", "Automatic", "Sedan", "RWD", "https://cdn.site.com/images/model3.jpg", 39999.0));
+    public CatalogVehicleService() {
+        vehicles.add(new Vehicle("veh-1", "Toyota", "Corolla", 2024, "Hybrid", "Automatic", "Sedan", "FWD",
+                "https://cdn.site.com/images/corolla.jpg", 24000.0));
+        vehicles.add(new Vehicle("veh-2", "Ford", "F-150", 2023, "Petrol", "Automatic", "Pickup", "RWD",
+                "https://cdn.site.com/images/f150.jpg", 32000.0));
+        vehicles.add(new Vehicle("veh-3", "Tesla", "Model 3", 2024, "Electric", "Automatic", "Sedan", "RWD",
+                "https://cdn.site.com/images/model3.jpg", 39999.0));
     }
 
     public List<Vehicle> search(VehicleSearchParams params) {
         return vehicles.stream()
                 .filter(v -> params.getMake() == null || v.getMake().equalsIgnoreCase(params.getMake()))
-                .filter(v -> params.getModel() == null || v.getModel().toLowerCase(Locale.ROOT).contains(params.getModel().toLowerCase(Locale.ROOT)))
+                .filter(v -> params.getModel() == null ||
+                        v.getModel().toLowerCase(Locale.ROOT).contains(params.getModel().toLowerCase(Locale.ROOT)))
                 .filter(v -> params.getFuelType() == null || v.getFuelType().equalsIgnoreCase(params.getFuelType()))
                 .filter(v -> params.getTransmission() == null || v.getTransmission().equalsIgnoreCase(params.getTransmission()))
                 .filter(v -> params.getBodyType() == null || v.getBodyType().equalsIgnoreCase(params.getBodyType()))
@@ -30,8 +37,8 @@ public class VehicleService {
                 .filter(v -> params.getYearTo() == null || v.getYear() <= params.getYearTo())
                 .filter(v -> params.getSearch() == null ||
                         (v.getMake() + " " + v.getModel() + " " + v.getFuelType() + " " + v.getBodyType())
-                            .toLowerCase(Locale.ROOT)
-                            .contains(params.getSearch().toLowerCase(Locale.ROOT)))
+                                .toLowerCase(Locale.ROOT)
+                                .contains(params.getSearch().toLowerCase(Locale.ROOT)))
                 .sorted(getComparator(params.getSort()))
                 .skip((long) (params.getPage() - 1) * params.getLimit())
                 .limit(params.getLimit())
@@ -41,7 +48,8 @@ public class VehicleService {
     public long count(VehicleSearchParams params) {
         return vehicles.stream()
                 .filter(v -> params.getMake() == null || v.getMake().equalsIgnoreCase(params.getMake()))
-                .filter(v -> params.getModel() == null || v.getModel().toLowerCase(Locale.ROOT).contains(params.getModel().toLowerCase(Locale.ROOT)))
+                .filter(v -> params.getModel() == null ||
+                        v.getModel().toLowerCase(Locale.ROOT).contains(params.getModel().toLowerCase(Locale.ROOT)))
                 .filter(v -> params.getFuelType() == null || v.getFuelType().equalsIgnoreCase(params.getFuelType()))
                 .filter(v -> params.getTransmission() == null || v.getTransmission().equalsIgnoreCase(params.getTransmission()))
                 .filter(v -> params.getBodyType() == null || v.getBodyType().equalsIgnoreCase(params.getBodyType()))
@@ -50,8 +58,8 @@ public class VehicleService {
                 .filter(v -> params.getYearTo() == null || v.getYear() <= params.getYearTo())
                 .filter(v -> params.getSearch() == null ||
                         (v.getMake() + " " + v.getModel() + " " + v.getFuelType() + " " + v.getBodyType())
-                            .toLowerCase(Locale.ROOT)
-                            .contains(params.getSearch().toLowerCase(Locale.ROOT)))
+                                .toLowerCase(Locale.ROOT)
+                                .contains(params.getSearch().toLowerCase(Locale.ROOT)))
                 .count();
     }
 
